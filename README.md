@@ -13,7 +13,7 @@ Note that at the time of writing, the fpod R package has only partial support fo
 4. Run your data processing and analyses in R
 
 # Installation 
-The simplest way to install the fpod package is by using devtools::install_github, as outlined below.
+The simplest way to install the fpod package is by using `devtools::install_github`, as outlined below.
 
 ```
 install.packages("devtools")
