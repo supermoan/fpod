@@ -19,13 +19,14 @@ The simplest way to install the fpod package is by using devtools::install_githu
 install.packages("devtools")
 library(devtools)
 install_github("supermoan/fpod")
-library(fpod)
 ```
 
 # Usage
 ``` r
+library(fpod)
+
 # read a FP3 file
-dat <- read_fpod(file = "helga period 1.FP3")
+dat <- read_fpod(file = "some_site period1 2026 01 10.FP3")
 
 # show misc. information (pod number, deployment date, etc.)
 dat$header
