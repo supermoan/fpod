@@ -22,6 +22,7 @@ install_github("supermoan/fpod")
 ```
 
 # Usage
+Some basic examples are provided below. See `?read_fpod` for details.
 ``` r
 library(fpod)
 
