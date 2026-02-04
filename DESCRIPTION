@@ -1,0 +1,17 @@
+Package: fpod
+Title: Read and process FPOD and CPOD data
+Version: 0.0.0.9000
+Date: 2026-27-01
+Authors@R: 
+    person("André", "Moan", , email = "andre.moan@hi.no", role = "cre")
+Description: Reads data stored in FP1, FP3, CP1 and CP3 files. This includes click data, train data, species classifications, environmental data (temperatures, battery voltage, etc.) and pseudo-wav data
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+LinkingTo: Rcpp
+Imports: 
+    Rcpp (>= 1.1.0),
+    data.table
+Depends: 
+    R (>= 3.5)
