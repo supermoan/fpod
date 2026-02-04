@@ -40,7 +40,7 @@ dpm_per_day <- dat$clicks[species=="NBHF", length(unique(minute(time))), as.Date
 ```
 
 # Disclaimer
-Note that this project is not affiliated with the manufacturer of the CPOD and FPOD (Chelonia). 
+Note that this project is not affiliated with the manufacturer of the CPOD and FPOD ([Chelonia](https://www.chelonia.co.uk/)). 
 
 
 
