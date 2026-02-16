@@ -27,7 +27,7 @@
 #' * click_no: an ID number that uniquely identifies the click.
 #' * train_id: an ID number from the KERNO classifier, reset for each minute.
 #' * species: the species classification from the KERNO classifier
-#' * quality_level: the quality level of the classification, 1 to 3.
+#' * quality_level: the quality level of the classification, 1 (Lo), 2 (Mod) or 3 (Hi). 
 #' * echo: TRUE if the KERNO classifier thinks this click might be an echo of another click that has already been classified.
 #' * ncyc: number of cycles in click. This is a proxy for the click duration.
 #' * pkat: the number of the cycle with the highest amplitude
