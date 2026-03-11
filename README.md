@@ -35,8 +35,12 @@ dat$header
 # tally up the number of clicks in each species category
 table(dat$clicks$species)
 
-# Calculate Detection Positive Minutes (DPMs) for porpoises per day
-dpm_per_day <- dat$clicks[species=="NBHF", length(unique(minute(time))), as.Date(time)]
+# Calculate Detection Positive Minutes (DPMs) for porpoises
+nbhf <- dat$clicks[species == "NBHF" & quality_level >= 2]
+dpm <- fp_summarize(nbhf, dat$env, dat$header)
+
+# Sum up NBHF DPMs by day
+dpm_per_day <- dpm[, .(dpm = sum(dpm)), .(date = as.Date(time))]
 ```
 
 # Disclaimer
