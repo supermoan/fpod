@@ -71,7 +71,7 @@ fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
         } else {
             # even if there are no clicks, add a time column to make the
             # clicks data.table rbind-friendly in lapply calls and similar.
-            ret$clicks$time <- NA
+            ret$clicks$time <- integer()
         }
 
         col_order <- c(ncol(ret$clicks), seq(1, ncol(ret$clicks) - 1))
