@@ -59,9 +59,11 @@ fp_summarize <- function(clicks, env, header) {
                            dpm = 0L, # detection positive minutes
                            bpm = 0L) # buzz positive minutes
 
-    dat <- clicks[, list(dpm = as.integer(.N>0), # detection positive mins
-                      bpm = as.integer(sum(buzz)>0)), # buzz positive mins
-                  list(timestamp = fp_floor_timestamp(time, unit = "minute"))]
+    if (nrow(clicks) > 0L) {
+        dat <- clicks[, list(dpm = as.integer(.N>0L), # detection positive mins
+                          bpm = as.integer(sum(buzz)>0L)), # buzz positive mins
+                      list(timestamp = fp_floor_timestamp(time, unit = "minute"))]
+    }
 
     dat_full[dat, on = "timestamp", c("dpm", "bpm") := list(i.dpm, i.bpm)]
     dat_full
