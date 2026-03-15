@@ -10,5 +10,3 @@
   Read FPOD data
 - [`fp_summarize()`](https://supermoan.github.io/fpod/reference/fp_summarize.md)
   : Calculates minute-resolution summaries of clicks
-- [`read_fpod()`](https://supermoan.github.io/fpod/reference/read_fpod.md)
-  : Read FPOD data
