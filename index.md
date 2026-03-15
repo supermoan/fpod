@@ -1,5 +1,3 @@
-# fpod
-
 The goal of fpod is to provide a means to directly load FPOD and CPOD
 data files into R. The FPOD data files contain binary data, so they
 can’t trivially be read into R using the usual approach (e.g. fread or
