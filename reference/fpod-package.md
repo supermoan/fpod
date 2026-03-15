@@ -1,0 +1,23 @@
+# fpod: Read and process FPOD and CPOD data
+
+This package reads FPOD and CPOD data into R directly from the FPOD data
+files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data files
+contain binary data, so they can't trivially be read into R using the
+usual approach (e.g. fread or read.csv). This package decodes the binary
+data and imports all the data in one go (i.e. header/metadata, clicks,
+KERNO classifications, environmental data and pseudo-WAV data). It is
+then trivial to aggregate data as you please, e.g. DPMs per time block.
+The advantage of handling data processing in R is a long topic, but
+suffice it to say that it 1) simplifies things (many fewer steps, as
+different vars have to be exported in multiple goes in the official FPOD
+app), and more importantly, 2) makes data processing 100
+
+## See also
+
+[`fp_read()`](https://supermoan.github.io/fpod/reference/fp_read.md),
+[`fp_summarize()`](https://supermoan.github.io/fpod/reference/fp_summarize.md),
+[`fp_find_buzzes()`](https://supermoan.github.io/fpod/reference/fp_find_buzzes.md)
+
+## Author
+
+**Maintainer**: André Moan <andre.moan@hi.no>
