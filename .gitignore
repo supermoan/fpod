@@ -2,3 +2,5 @@
 .Rhistory
 fpod.Rproj
 output.csv
+inst/doc
+docs
