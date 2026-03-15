@@ -1,3 +1,3 @@
 #' @useDynLib fpod, .registration = TRUE
-#' @importFrom Rcpp sourceCpp 
+#' @importFrom Rcpp sourceCpp
 NULL

@@ -1,34 +1,41 @@
 #' Read FPOD data
 #'
 #' This function reads an FPOD or CPOD data file (FP1, FP3, CP1, CP3) into R.
+#'
 #' @param file a character string. The path to the FPOD (or CPOD) data file.
 #' @param tz a character string. The time zone specification to be used for
-#' calculating dates. Passed unchanged to [as.POSIXct()].
-#' @param simplify logical. If TRUE, simplifies the clicks data.table by stripping
-#' away some columns, such as `clk_ipi_range`, `ipi_pre_max`, `amp_reversals`,
-#' `duration`, and `has_wav`.
-#' @param amp a character string. With `amp`="extended", higher values are extrapolated
-#' from the duration of clipping and the IPI. For any other values of amp, the
-#' compressed SPL values recorded by the FPOD are used directly.
+#'   calculating dates. Passed unchanged to [as.POSIXct()].
+#' @param simplify logical. If TRUE, simplifies the clicks data.table by
+#'   stripping away some columns, such as `clk_ipi_range`, `ipi_pre_max`,
+#'   `amp_reversals`, `duration`, and `has_wav`.
+#' @param amp a character string. With `amp`="extended", higher values are
+#'   extrapolated from the duration of clipping and the IPI. For any other
+#'   values of amp, the compressed SPL values recorded by the FPOD are used
+#'   directly.
 #'
-#' @returns A list, with one or more of the following data.frames (or data.tables, if available):
-#' * header: a list with pod name, coordinates, starting time, stopping time, user notes, etc.
+#' @returns A list, with one or more of the following data.frames (or
+#'   data.tables, if available):
+#' * header: a list with pod name, coordinates, starting time, stopping time, user
+#'   notes, etc.
 #' * clicks: A data.frame (or data.table) with data about each click. See details.
-#' * wav (only FPx files): pseudo-wav data - inter-peak-intervals and raw amplitudes for a subset of clicks
-#' * env: misc data, ambient temperature (in deg C) and battery voltage per stack (in units of 10 millivolts)
+#' * wav (only FPx files): pseudo-wav data - inter-peak-intervals and raw amplitudes
+#'   for a subset of clicks
+#' * env: misc data, ambient temperature (in deg C) and battery voltage per stack
+#'   (in units of 10 millivolts)
 #'
-#' @details
-#' The clicks data.frame contains the following columns:
+#' @details The clicks data.frame contains the following columns:
 #' * time: The time and date of the click, at microsecond resolution. Note that R might
-#' only display dates and times to a second precision, but any date or time calculations
-#' will use the full precision.
+#'   only display dates and times to a second precision, but any date or time
+#'   calculations will use the full precision.
 #' * minute: minutes elapsed, since starting the FPOD
 #' * microsec: microseconds elapsed, since the start of the minute.
 #' * click_no: an ID number that uniquely identifies the click.
 #' * train_id: an ID number from the KERNO classifier, reset for each minute.
 #' * species: the species classification from the KERNO classifier
-#' * quality_level: the quality level of the classification, 1 to 3.
-#' * echo: TRUE if the KERNO classifier thinks this click might be an echo of another click that has already been classified.
+#' * quality_level: the quality level of the classification, 0 (?/echo), 1 (Lo),
+#'   2 (Mod) or 3 (Hi).
+#' * echo: TRUE if the KERNO classifier thinks this click might be an echo of
+#'   another click that has already been classified.
 #' * ncyc: number of cycles in click. This is a proxy for the click duration.
 #' * pkat: the number of the cycle with the highest amplitude
 #' * clk_ipi_range: range of inter-peak-intervals (IPIs) among cycles in click
@@ -37,37 +44,49 @@
 #' * khz: The frequency (in kHz) of the peak cycle.
 #' * amp_at_max: the peak amplitude (SPL) of the loudest cycle
 #' * amp_reversals: the number of amplitude reversals
-#' * duration:
+#' * duration: click duration
 #' * has_wav: TRUE if there is a pseudo-WAV recorded for this click.
 #'
 #' @examples
 #' # read a FP3 file
-#' dat <- read_fpod(file = "helga period 1.FP3")
+#' fn <- fp_example("gullars_period1.FP3")
+#' dat <- fp_read(fn)
 #'
 #' # show misc. information (pod number, deployment date, etc.)
 #' dat$header
 #'
+#' # show battery levels and recorded temperatures for each minute
+#' dat$env
+#'
 #' # tally up the number of clicks in each species category
 #' table(dat$clicks$species)
 #'
-#' # Calculate Detection Positive Minutes (DPMs) for porpoises per day
-#'  dpm_per_day <- dat$clicks[species=="NBHF", length(unique(minute(time))), as.Date(time)]
+#' @seealso [fp_find_buzzes()], [fp_summarize()]
 #' @import data.table
 #' @export
 #'
-read_fpod <- function(file, tz = "", simplify = TRUE, amp = "extended") {
+fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
 
-    ret <- readFPOD(file)
+    if (!file.exists(file)) {
+        stop("File does not exist!")
+    }
+        ret <- readFPOD(file)
     type <- toupper(substr(file, nchar(file)-2, nchar(file)))
 
     if ("clicks" %in% names(ret)) {
         if (nrow(ret$clicks) > 0) {
+            ret$clicks$pod <- ret$header$pod_id
             ret$clicks$time = as.POSIXct("1900-01-01 00:00", tz = tz) +
                 (ret$header$first_logged_min + ret$clicks$minute) * 60 +
                 ret$clicks$microsec / 1e6
+        } else {
+            # even if there are no clicks, add a time column to make the
+            # clicks data.table rbind-friendly in lapply calls and similar.
+            ret$clicks$pod <- integer()
+            ret$clicks$time <- integer()
         }
 
-        col_order <- c(ncol(ret$clicks), seq(1, ncol(ret$clicks) - 1))
+        col_order <- c(ncol(ret$clicks)-1, ncol(ret$clicks), seq(1, ncol(ret$clicks) - 2))
 
         data.table::setDT(ret$clicks)
         data.table::setcolorder(ret$clicks, col_order)
@@ -96,10 +115,15 @@ read_fpod <- function(file, tz = "", simplify = TRUE, amp = "extended") {
             ret$clicks[, duration := NULL]
         }
 
+        setattr(ret$clicks, "start", as.POSIXct("1900-01-01 00:00", tz = tz) +
+                    ret$header$first_logged_min * 60)
     }
 
     if ("env" %in% names(ret)) {
         data.table::setDT(ret$env)
+        if ("clicks" %in% names(ret) && "minute" %in% colnames(ret$env)) {
+            setattr(ret$clicks, "on", ret$env$minute)
+        }
     }
 
     if ("wav" %in% names(ret) && nrow(ret$wav) > 0) {
@@ -115,3 +139,4 @@ read_fpod <- function(file, tz = "", simplify = TRUE, amp = "extended") {
 
     ret
 }
+
