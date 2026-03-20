@@ -6,13 +6,30 @@
 \alias{fpod-package}
 \title{fpod: Read and process FPOD and CPOD data}
 \description{
-This package reads FPOD and CPOD data into R directly from the FPOD data files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data files contain binary data, so they can't trivially be read into R using the usual approach (e.g. fread or read.csv). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate data as you please, e.g. DPMs per time block. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing 100% transparent and reproducible.
+Description: This package reads FPOD and CPOD data into R directly from the
+FPOD data files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data
+files contain binary data, so they can't trivially be read into R using the
+usual approach (e.g. fread or read.csv). This package decodes the binary
+data and imports all the data in one go (i.e. header/metadata, clicks,
+KERNO classifications, environmental data and pseudo-WAV data). It is then
+trivial to aggregate data as you please, e.g. DPMs per time block. The
+advantage of handling data processing in R is a long topic, but suffice it
+to say that it 1) simplifies things (many fewer steps, as different vars
+have to be exported in multiple goes in the official FPOD app), and more
+importantly, 2) makes data processing transparent and reproducible.
+}
+\details{
+For more information, see:
+\itemize{
+\item vignette(s): Type vignette(package="fpod")
+\item help functions for any of the functions listed under \verb{See Also}
+\item package website \url{https://supermoan.github.io/fpod/}
+}
 }
 \seealso{
 \code{\link[=fp_read]{fp_read()}}, \code{\link[=fp_summarize]{fp_summarize()}}, \code{\link[=fp_find_buzzes]{fp_find_buzzes()}}
 }
 \author{
-\strong{Maintainer}: André Moan \email{andre.moan@hi.no}
-
+André Moan \href{mailto:andre.moan@hi.no}{andre.moan@hi.no} \href{https://orcid.org/0000-0001-9506-2949}{ORCID}
 }
 \keyword{internal}

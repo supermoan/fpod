@@ -49,13 +49,6 @@ fp_find_buzzes <- function(x, method = "clicks") {
         stop("x must be a data.table with click timestamps in a POSIXct column `time`")
     }
 
-    # check order of timestamps and issue a warning if they seem off
-    ot <- order(x$time)
-
-    if (any(ot != seq(1, length(ot)))) {
-        warning("clicks are not ordered chronologically, check results carefully")
-    }
-
     ici <- c(NA_real_, as.numeric(diff(x$time, units = "mins")))
     buzz <- rep(0L, length(ici))
 
@@ -68,8 +61,18 @@ fp_find_buzzes <- function(x, method = "clicks") {
             stop("Package \"mixtools\" must be installed to use method=\"trains\"")
         }
 
-        logICI <- log(ici)
+        sorted <- !is.unsorted(x$time)
+        logICI <- suppressWarnings(log(ici))
         valid <- which(!is.na(logICI) & !is.infinite(logICI))
+
+        if (length(valid) == 0) {
+            stop("all inter-click-intervals are NA - nothing to do!")
+        }
+
+        if (sorted == FALSE) {
+            warning("clicks are not ordered chronologically, check results carefully")
+        }
+
         fit <- mixtools::normalmixEM(logICI[valid], k = 3)
         buzz[valid] <- apply(fit$posterior, 1, which.max)
         buzz[valid] <- as.integer(buzz[valid] == 1)
