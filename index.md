@@ -1,3 +1,5 @@
+# fpod
+
 The goal of fpod is to provide a means to directly load FPOD and CPOD
 data files into R. The FPOD data files contain binary data, so they
 can’t trivially be read into R using the usual approach (e.g. fread or
@@ -21,19 +23,18 @@ importantly, 2) makes data processing 100% transparent and reproducible.
 
 ## Installation
 
-You can install the development version of fpod from
-[GitHub](https://github.com/) with:
+You can install the development version of fpod from GitHub:
 
 ``` r
 #install.packages("devtools")
-library(devtools)
-install_github("supermoan/fpod")
+devtools::install_github("supermoan/fpod")
 ```
 
 ## Quick start
 
-If you just want to get started, load the package, and call fp_read on
-your FP3 file. For example:
+If you just want to get started, load the package, and call
+[`fp_read()`](https://supermoan.github.io/fpod/reference/fp_read.md) on
+your FPOD data, like so:
 
 ``` r
 library(fpod)
@@ -42,8 +43,17 @@ dat <- fp_read(fn)
 ```
 
 This will give you access to most of the information in the FP3 file,
-including header/metadata, clicks data, wav, data and misc other data,
-such as battery levels.
+including header/metadata, clicks data and misc other data, such as
+battery levels.
 
-For more examples, see the vignette and the help files for each
-individual function.
+For more examples, see the
+[vignette](https://supermoan.github.io/fpod/articles/fpod.html) and the
+help files for each individual function:
+[?fp_read](https://supermoan.github.io/fpod/reference/fp_read.html),
+[?fp_summarize](https://supermoan.github.io/fpod/reference/fp_summarize.html)
+[?fp_find_buzzes](https://supermoan.github.io/fpod/reference/fp_find_buzzes.html).
+
+## Disclaimer
+
+This package is not affiliated with the manufacturer of the CPOD and
+FPOD hardware, [Chelonia](https://chelonia.co.uk).

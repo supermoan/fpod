@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Read and process FPOD and CPOD data">
-<meta name="description" content="This package reads FPOD and CPOD data into R directly from the FPOD data files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data files contain binary data, so they can't trivially be read into R using the usual approach (e.g. fread or read.csv). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate data as you please, e.g. DPMs per time block. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing 100% transparent and reproducible.">
-<meta property="og:description" content="This package reads FPOD and CPOD data into R directly from the FPOD data files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data files contain binary data, so they can't trivially be read into R using the usual approach (e.g. fread or read.csv). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate data as you please, e.g. DPMs per time block. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing 100% transparent and reproducible.">
+<meta name="description" content="This package reads FPOD and CPOD data into R directly from the FPOD data files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data files contain binary data, so they can't trivially be read into R using the usual approach (e.g. fread or read.csv). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate data as you please, e.g. DPMs per time block. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing transparent and reproducible.">
+<meta property="og:description" content="This package reads FPOD and CPOD data into R directly from the FPOD data files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data files contain binary data, so they can't trivially be read into R using the usual approach (e.g. fread or read.csv). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate data as you please, e.g. DPMs per time block. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing transparent and reproducible.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -46,7 +46,11 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><p>The goal of fpod is to provide a means to directly load FPOD and CPOD data files into R. The FPOD data files contain binary data, so they can’t trivially be read into R using the usual approach (e.g. fread or read.csv). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate data as you please, e.g. DPMs per time block. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing 100% transparent and reproducible.</p>
+  <main id="main" class="col-md-9">
+<div class="section level1">
+<div class="page-header"><h1 id="fpod">fpod<a class="anchor" aria-label="anchor" href="#fpod"></a>
+</h1></div>
+<p>The goal of fpod is to provide a means to directly load FPOD and CPOD data files into R. The FPOD data files contain binary data, so they can’t trivially be read into R using the usual approach (e.g. fread or read.csv). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate data as you please, e.g. DPMs per time block. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing 100% transparent and reproducible.</p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -62,30 +66,34 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of fpod from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of fpod from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("devtools")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
-<span><span class="fu">install_github</span><span class="op">(</span><span class="st">"supermoan/fpod"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"supermoan/fpod"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<p>If you just want to get started, load the package, and call fp_read on your FP3 file. For example:</p>
+<p>If you just want to get started, load the package, and call <code><a href="reference/fp_read.html">fp_read()</a></code> on your FPOD data, like so:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://supermoan.github.io/fpod/">fpod</a></span><span class="op">)</span></span>
 <span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fp_example.html">fp_example</a></span><span class="op">(</span><span class="st">"gullars_period1.FP3"</span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fp_read.html">fp_read</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span></span></code></pre></div>
-<p>This will give you access to most of the information in the FP3 file, including header/metadata, clicks data, wav, data and misc other data, such as battery levels.</p>
-<p>For more examples, see the vignette and the help files for each individual function.</p>
+<p>This will give you access to most of the information in the FP3 file, including header/metadata, clicks data and misc other data, such as battery levels.</p>
+<p>For more examples, see the <a href="https://supermoan.github.io/fpod/articles/fpod.html">vignette</a> and the help files for each individual function: <a href="https://supermoan.github.io/fpod/reference/fp_read.html">?fp_read</a>, <a href="https://supermoan.github.io/fpod/reference/fp_summarize.html">?fp_summarize</a> <a href="https://supermoan.github.io/fpod/reference/fp_find_buzzes.html">?fp_find_buzzes</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>
+</h2>
+<p>This package is not affiliated with the manufacturer of the CPOD and FPOD hardware, <a href="https://chelonia.co.uk" class="external-link">Chelonia</a>.</p>
+</div>
 </div>
 
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -104,7 +112,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/supermoan/fpod/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/supermoan/fpod/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
