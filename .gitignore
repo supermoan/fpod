@@ -4,3 +4,8 @@ fpod.Rproj
 output.csv
 inst/doc
 docs
+src/fpod.dll
+src/RcppExports.o
+src/read_fpod.o
+/doc/
+/Meta/

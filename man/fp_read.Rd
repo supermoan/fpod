@@ -30,8 +30,9 @@ notes, etc.
 \item clicks: A data.frame (or data.table) with data about each click. See details.
 \item wav (only FPx files): pseudo-wav data - inter-peak-intervals and raw amplitudes
 for a subset of clicks
-\item env: misc data, ambient temperature (in deg C) and battery voltage per stack
-(in units of 10 millivolts)
+\item env: misc data, angle from vertical (in degrees), ambient temperature (in deg C),
+battery voltage per stack (in units of 10 millivolts), which battery column
+is in use, and the pod on/off state
 }
 }
 \description{

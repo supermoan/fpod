@@ -18,10 +18,11 @@
 #' * header: a list with pod name, coordinates, starting time, stopping time, user
 #'   notes, etc.
 #' * clicks: A data.frame (or data.table) with data about each click. See details.
-#' * wav (only FPx files): pseudo-wav data - inter-peak-intervals and raw amplitudes
-#'   for a subset of clicks
-#' * env: misc data, ambient temperature (in deg C) and battery voltage per stack
-#'   (in units of 10 millivolts)
+#' * wav (only FPx files): pseudo-wav data - inter-peak-intervals (in 250 ns units)
+#'   and raw amplitudes for a subset of clicks
+#' * env: misc data, angle from vertical (in degrees), ambient temperature (in deg C),
+#'   battery voltage per stack (in units of 10 millivolts), which battery column
+#'   is in use, and the pod on/off state
 #'
 #' @details The clicks data.frame contains the following columns:
 #' * time: The time and date of the click, at microsecond resolution. Note that R might
@@ -123,6 +124,19 @@ fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
         data.table::setDT(ret$env)
         if ("clicks" %in% names(ret) && "minute" %in% colnames(ret$env)) {
             setattr(ret$clicks, "on", ret$env$minute)
+        }
+        if (all(c("prior_min", "next_min") %in% colnames(ret$env))) {
+
+            ret$env$pod_on <- as.logical(NA)
+            # note: the order of these two operations is important
+            ret$env$pod_on[2:nrow(ret$env)] <- ret$env$next_min[-nrow(ret$env)]
+            ret$env$pod_on[seq(1,nrow(ret$env)-1)] <- ret$env$prior_min[-1]
+            ret$env[, c("prior_min", "next_min") := NULL]
+        }
+
+        if ("angle" %in% colnames(ret$env)) {
+            ret$env[fpod_conversion_tables$angles,
+                    on = c("angle"="cp3_angle"), angle := actual_angle]
         }
     }
 

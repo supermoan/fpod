@@ -3,7 +3,8 @@ utils::globalVariables(c(".", "fpod_conversion_tables", "amp_at_max", "khz",
                          "clk_ipi_range", "ipi_pre_max", "ipi_at_max",
                          "amp_reversals", "duration", "ncyc", "i.ncyc", "cycle",
                          "click_no", "first_cycle", "buzz", "time", "i.dpm",
-                         "i.bpm", "amp_at_max", "real_amp", "J", "val"))
+                         "i.bpm", "amp_at_max", "real_amp", "J", "val", "angle",
+                         "actual_angle"))
 
 #' Internal helper function to lookup kHz values from inter-peak-intervals (IPIs)
 #'

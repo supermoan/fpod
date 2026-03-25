@@ -19,7 +19,7 @@ test_that("FP3 is read correctly", {
 
     # env data
     expect_equal(nrow(dat$env), 14400L)
-    expect_equal(ncol(dat$env), 4L)
+    expect_equal(ncol(dat$env), 7L)
 
     # clicks data
     expect_equal(nrow(dat$clicks), 82637L)

@@ -173,9 +173,14 @@ public:
 
     // environmental data
     std::vector<int> temp_deg_c;
-    std::vector<int> pod_angle;
+    std::vector<int> angle_x;
+    //std::vector<int> angle_y;
+    //std::vector<int> angle_z;
     std::vector<int> bat1;
     std::vector<int> bat2;
+    std::vector<int> bat_use;
+    std::vector<bool> prior_min;
+    std::vector<bool> next_min;
 
     Rcpp::List& header;
     int pic_code{0};
@@ -243,9 +248,16 @@ public:
 
             DataFrame env = DataFrame::create(
                 Named("minute") = seq(1, temp_deg_c.size()),
+                Named("angle") = wrap(angle_x),
+                //Named("angle_x") = wrap(angle_x),
+                //Named("angle_y") = wrap(angle_y),
+                //Named("angle_z") = wrap(angle_z),
                 Named("degC") = wrap(temp_deg_c),
                 Named("bat1v") = wrap(bat1),
-                Named("bat2v") = wrap(bat2)
+                Named("bat2v") = wrap(bat2),
+                Named("bat_use") = wrap(bat_use),
+                Named("prior_min") = wrap(prior_min),
+                Named("next_min") = wrap(next_min)
             );
 
             ret.push_back(env, "env");
@@ -390,6 +402,10 @@ int getFPODData(std::ifstream& fid,
 
                 dat.temp_deg_c.push_back(static_cast<int>(buf[7]));
 
+                dat.angle_x.push_back(buf[3]);
+                //dat.angle_y.push_back(buf[4]);
+                //dat.angle_z.push_back(buf[5]);
+
                 if (pic_ver < 28 && buf[11] == 0 && buf[13]) {
                     dat.bat1.push_back(buf[12]);
                     dat.bat2.push_back(buf[13]);
@@ -397,6 +413,16 @@ int getFPODData(std::ifstream& fid,
                     dat.bat1.push_back(buf[11]);
                     dat.bat2.push_back(buf[12]);
                 }
+
+                if ((buf[10] & 2) == 0) {
+                    dat.bat_use.push_back(1);
+                } else {
+                    dat.bat_use.push_back(2);
+                }
+
+                //dat.bat_use.push_back(1+((buf[10] & 2) == 0));
+                dat.prior_min.push_back(buf[10] & 1);
+                dat.next_min.push_back((buf[10] >> 2) & 1);
 
             }
         }
