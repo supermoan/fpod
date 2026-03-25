@@ -1,4 +1,4 @@
 # License
 
     YEAR: 2026
-    COPYRIGHT HOLDER: Andri Moan
+    COPYRIGHT HOLDER: André Moan

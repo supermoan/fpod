@@ -92,8 +92,9 @@ this in the future.</p>
 <ol style="list-style-type: decimal">
 <li>Use the official FPOD app to import FPOD data from a FPOD memory
 card (this generates a FP1 file)</li>
-<li>Use the FPOD app to run the KERNO classifier (this generates a FP3
-file)</li>
+<li>Use the FPOD app to run the KERNO or KERNO-F classifier (this
+generates a CP3 or FP3 file)</li>
+<li>Perform checks, edits and validations (again, in the FPOD app)</li>
 <li>Use the FPOD R package (this package) to read the FP3 file data into
 R</li>
 <li>Run your data processing and analyses in R</li>
@@ -150,17 +151,20 @@ this to a more human-friendly date format:</p>
 <p>We multiply by 60 since R interprets the number as seconds in POSIXct
 arithmetic.</p>
 <p>Next we have a data.table called <code>env</code>. This table lists
-the temperature recorded by the pod, as well as battery voltage (in
-desivolts) for each of the two battery columns, per minute. The minutes
-are relative to when the pod was started,
-i.e. <code>first_logged_min</code>.</p>
+the angle from vertical (in degrees) of the pod, the temperature
+recorded by the pod, as well as battery voltage (in desivolts) for each
+of the two battery columns, per minute. The minutes are relative to when
+the pod was started, i.e. <code>first_logged_min</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">env</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   14400 obs. of  4 variables:</span></span>
-<span><span class="co">#&gt;  $ minute: int  1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;  $ degC  : int  6 6 6 6 6 6 6 6 6 6 ...</span></span>
-<span><span class="co">#&gt;  $ bat1v : int  79 79 79 79 79 79 79 79 80 79 ...</span></span>
-<span><span class="co">#&gt;  $ bat2v : int  70 69 69 70 70 70 69 69 69 69 ...</span></span>
+<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   14400 obs. of  7 variables:</span></span>
+<span><span class="co">#&gt;  $ minute : int  1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;  $ angle  : int  36 36 28 36 35 26 32 32 34 32 ...</span></span>
+<span><span class="co">#&gt;  $ degC   : int  6 6 6 6 6 6 6 6 6 6 ...</span></span>
+<span><span class="co">#&gt;  $ bat1v  : int  79 79 79 79 79 79 79 79 80 79 ...</span></span>
+<span><span class="co">#&gt;  $ bat2v  : int  70 69 69 70 70 70 69 69 69 69 ...</span></span>
+<span><span class="co">#&gt;  $ bat_use: int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ pod_on : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
 <span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;externalptr&gt;</span></span></code></pre></div>
 <p>To understand the battery levels better, we can calculate the average
 voltage (in units of volts) per battery, which is probably what we’d use
@@ -170,8 +174,8 @@ if we wanted to plot battery usage over time.</p>
 <span><span class="co">#&gt; [1] 1.58 1.58 1.58 1.58 1.58 1.58</span></span></code></pre></div>
 <p>Now let’s turn our attention to the next element: The wav data.table
 holds extra information (inter-peak-intervals, IPI + sound pressure
-level, SPL) for a sample of recorded clicks, usually 5-10%, but possibly
-more or less depending on user configuration.</p>
+level, SPL) for a sample of recorded clicks, usually less than 1%, but
+possibly more or less depending on user configuration.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">wav</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   14053 obs. of  3 variables:</span></span>

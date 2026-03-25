@@ -30,11 +30,12 @@ this in the future.
 
 1.  Use the official FPOD app to import FPOD data from a FPOD memory
     card (this generates a FP1 file)
-2.  Use the FPOD app to run the KERNO classifier (this generates a FP3
-    file)
-3.  Use the FPOD R package (this package) to read the FP3 file data into
+2.  Use the FPOD app to run the KERNO or KERNO-F classifier (this
+    generates a CP3 or FP3 file)
+3.  Perform checks, edits and validations (again, in the FPOD app)
+4.  Use the FPOD R package (this package) to read the FP3 file data into
     R
-4.  Run your data processing and analyses in R
+5.  Run your data processing and analyses in R
 
 ## Basic usage
 
@@ -97,18 +98,22 @@ as.POSIXct("1900-01-01", tz="") + dat$header$first_logged_min * 60
 We multiply by 60 since R interprets the number as seconds in POSIXct
 arithmetic.
 
-Next we have a data.table called `env`. This table lists the temperature
-recorded by the pod, as well as battery voltage (in desivolts) for each
-of the two battery columns, per minute. The minutes are relative to when
-the pod was started, i.e. `first_logged_min`.
+Next we have a data.table called `env`. This table lists the angle from
+vertical (in degrees) of the pod, the temperature recorded by the pod,
+as well as battery voltage (in desivolts) for each of the two battery
+columns, per minute. The minutes are relative to when the pod was
+started, i.e. `first_logged_min`.
 
 ``` r
 str(dat$env)
-#> Classes 'data.table' and 'data.frame':   14400 obs. of  4 variables:
-#>  $ minute: int  1 2 3 4 5 6 7 8 9 10 ...
-#>  $ degC  : int  6 6 6 6 6 6 6 6 6 6 ...
-#>  $ bat1v : int  79 79 79 79 79 79 79 79 80 79 ...
-#>  $ bat2v : int  70 69 69 70 70 70 69 69 69 69 ...
+#> Classes 'data.table' and 'data.frame':   14400 obs. of  7 variables:
+#>  $ minute : int  1 2 3 4 5 6 7 8 9 10 ...
+#>  $ angle  : int  36 36 28 36 35 26 32 32 34 32 ...
+#>  $ degC   : int  6 6 6 6 6 6 6 6 6 6 ...
+#>  $ bat1v  : int  79 79 79 79 79 79 79 79 80 79 ...
+#>  $ bat2v  : int  70 69 69 70 70 70 69 69 69 69 ...
+#>  $ bat_use: int  1 1 1 1 1 1 1 1 1 1 ...
+#>  $ pod_on : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...
 #>  - attr(*, ".internal.selfref")=<externalptr>
 ```
 
@@ -123,8 +128,8 @@ head(dat$env$bat1v/10/5)
 
 Now let’s turn our attention to the next element: The wav data.table
 holds extra information (inter-peak-intervals, IPI + sound pressure
-level, SPL) for a sample of recorded clicks, usually 5-10%, but possibly
-more or less depending on user configuration.
+level, SPL) for a sample of recorded clicks, usually less than 1%, but
+possibly more or less depending on user configuration.
 
 ``` r
 str(dat$wav)

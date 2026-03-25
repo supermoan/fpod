@@ -76,8 +76,9 @@ notes, etc.</p></li>
 <li><p>clicks: A data.frame (or data.table) with data about each click. See details.</p></li>
 <li><p>wav (only FPx files): pseudo-wav data - inter-peak-intervals and raw amplitudes
 for a subset of clicks</p></li>
-<li><p>env: misc data, ambient temperature (in deg C) and battery voltage per stack
-(in units of 10 millivolts)</p></li>
+<li><p>env: misc data, angle from vertical (in degrees), ambient temperature (in deg C),
+battery voltage per stack (in units of 10 millivolts), which battery column
+is in use, and the pod on/off state</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -165,19 +166,19 @@ another click that has already been classified.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># show battery levels and recorded temperatures for each minute</span></span></span>
 <span class="r-in"><span><span class="va">dat</span><span class="op">$</span><span class="va">env</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        minute  degC bat1v bat2v</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1:      1     6    79    70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     2:      2     6    79    69</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     3:      3     6    79    69</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     4:      4     6    79    70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     5:      5     6    79    70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ---                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14396:  14396     5    79    67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14397:  14397     5    79    67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14398:  14398     5    79    66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14399:  14399     5    79    67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14400:  14400     5    79    67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        minute angle  degC bat1v bat2v bat_use pod_on</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;lgcl&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1:      1    36     6    79    70       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2:      2    36     6    79    69       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     3:      3    28     6    79    69       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     4:      4    36     6    79    70       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     5:      5    35     6    79    70       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ---                                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14396:  14396     0     5    79    67       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14397:  14397    14     5    79    67       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14398:  14398    14     5    79    66       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14399:  14399    20     5    79    67       1   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14400:  14400    25     5    79    67       1   TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># tally up the number of clicks in each species category</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">clicks</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span></span>

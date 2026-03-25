@@ -48,8 +48,9 @@ if available):
 - wav (only FPx files): pseudo-wav data - inter-peak-intervals and raw
   amplitudes for a subset of clicks
 
-- env: misc data, ambient temperature (in deg C) and battery voltage per
-  stack (in units of 10 millivolts)
+- env: misc data, angle from vertical (in degrees), ambient temperature
+  (in deg C), battery voltage per stack (in units of 10 millivolts),
+  which battery column is in use, and the pod on/off state
 
 ## Details
 
@@ -160,19 +161,19 @@ dat$header
 
 # show battery levels and recorded temperatures for each minute
 dat$env
-#>        minute  degC bat1v bat2v
-#>         <int> <int> <int> <int>
-#>     1:      1     6    79    70
-#>     2:      2     6    79    69
-#>     3:      3     6    79    69
-#>     4:      4     6    79    70
-#>     5:      5     6    79    70
-#>    ---                         
-#> 14396:  14396     5    79    67
-#> 14397:  14397     5    79    67
-#> 14398:  14398     5    79    66
-#> 14399:  14399     5    79    67
-#> 14400:  14400     5    79    67
+#>        minute angle  degC bat1v bat2v bat_use pod_on
+#>         <int> <int> <int> <int> <int>   <int> <lgcl>
+#>     1:      1    36     6    79    70       1   TRUE
+#>     2:      2    36     6    79    69       1   TRUE
+#>     3:      3    28     6    79    69       1   TRUE
+#>     4:      4    36     6    79    70       1   TRUE
+#>     5:      5    35     6    79    70       1   TRUE
+#>    ---                                              
+#> 14396:  14396     0     5    79    67       1   TRUE
+#> 14397:  14397    14     5    79    67       1   TRUE
+#> 14398:  14398    14     5    79    66       1   TRUE
+#> 14399:  14399    20     5    79    67       1   TRUE
+#> 14400:  14400    25     5    79    67       1   TRUE
 
 # tally up the number of clicks in each species category
 table(dat$clicks$species)
