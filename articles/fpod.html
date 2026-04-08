@@ -31,6 +31,12 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/fpod.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/advanced-usage.html">Advanced usage</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -161,30 +167,24 @@ the pod was started, i.e. <code>first_logged_min</code>.</p>
 <span><span class="co">#&gt;  $ minute : int  1 2 3 4 5 6 7 8 9 10 ...</span></span>
 <span><span class="co">#&gt;  $ angle  : int  36 36 28 36 35 26 32 32 34 32 ...</span></span>
 <span><span class="co">#&gt;  $ degC   : int  6 6 6 6 6 6 6 6 6 6 ...</span></span>
-<span><span class="co">#&gt;  $ bat1v  : int  79 79 79 79 79 79 79 79 80 79 ...</span></span>
-<span><span class="co">#&gt;  $ bat2v  : int  70 69 69 70 70 70 69 69 69 69 ...</span></span>
+<span><span class="co">#&gt;  $ bat1v  : num  1.58 1.58 1.58 1.58 1.58 1.58 1.58 1.58 1.6 1.58 ...</span></span>
+<span><span class="co">#&gt;  $ bat2v  : num  1.4 1.38 1.38 1.4 1.4 1.4 1.38 1.38 1.38 1.38 ...</span></span>
 <span><span class="co">#&gt;  $ bat_use: int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ pod_on : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
 <span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;externalptr&gt;</span></span></code></pre></div>
-<p>To understand the battery levels better, we can calculate the average
-voltage (in units of volts) per battery, which is probably what we’d use
-if we wanted to plot battery usage over time.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">env</span><span class="op">$</span><span class="va">bat1v</span><span class="op">/</span><span class="fl">10</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.58 1.58 1.58 1.58 1.58 1.58</span></span></code></pre></div>
 <p>Now let’s turn our attention to the next element: The wav data.table
 holds extra information (inter-peak-intervals, IPI + sound pressure
 level, SPL) for a sample of recorded clicks, usually less than 1%, but
 possibly more or less depending on user configuration.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">wav</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   14053 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;  $ click_no: int  548 548 548 548 548 548 548 737 737 737 ...</span></span>
+<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   15995 obs. of  3 variables:</span></span>
+<span><span class="co">#&gt;  $ click_no: int  547 547 547 547 547 547 547 736 736 736 ...</span></span>
 <span><span class="co">#&gt;  $ IPI     : int  255 29 29 30 30 31 34 255 255 255 ...</span></span>
 <span><span class="co">#&gt;  $ SPL     : int  8 37 45 46 40 27 24 3 12 4 ...</span></span>
 <span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;externalptr&gt;</span></span></code></pre></div>
 <p>Finally, and most importantly, we have the clicks data:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">clicks</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   82637 obs. of  14 variables:</span></span>
 <span><span class="co">#&gt;  $ pod          : int  7660 7660 7660 7660 7660 7660 7660 7660 7660 7660 ...</span></span>
@@ -225,7 +225,7 @@ our analysis. For example, let’s calculate DPMs for NBHF (narrow-band,
 high frequency) clicks of quality 2 or better. For the region where
 these data were collected, this corresponds to selecting only harbour
 porpoise clicks.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nbhf</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">clicks</span><span class="op">[</span><span class="va">species</span> <span class="op">==</span> <span class="st">"NBHF"</span> <span class="op">&amp;</span> <span class="va">quality_level</span> <span class="op">&gt;=</span> <span class="fl">2</span><span class="op">]</span></span>
 <span><span class="va">dpm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fp_summarize.html">fp_summarize</a></span><span class="op">(</span><span class="va">nbhf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dpm</span><span class="op">)</span></span>
@@ -246,7 +246,7 @@ porpoise clicks.</p>
 of the pod’s recording, so all we see are zeros in this preview. But we
 can expect some rows to be nonzero.</p>
 <p>Let’s just verify to be sure.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">dpm</span><span class="op">$</span><span class="va">dpm</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 472</span></span></code></pre></div>
 <p>There you go!</p>
@@ -262,7 +262,7 @@ should be passed the subset of clicks for which we want to find buzzes.
 While it only makes sense to use this on NBHF clicks, the function
 doesn’t care about that, it will try to find buzzes for whatever clicks
 data you give it.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">buzz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fp_find_buzzes.html">fp_find_buzzes</a></span><span class="op">(</span><span class="va">nbhf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">buzz</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  int [1:43216] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
@@ -273,7 +273,7 @@ data you give it.</p>
 <p>We can see that the function gives us a vector of 1s and 0s. You’ll
 find that the length of this vector is identical to the number of rows
 in the clicks data.table that we used.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">nbhf</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 43216</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">buzz</span><span class="op">)</span></span>
@@ -283,13 +283,13 @@ that it was or wasn’t a feeding buzz, with value 1 and 0,
 respectively.</p>
 <p>We can add the buzz info to the NBHF clicks data.table we’re
 investigating.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nbhf</span><span class="op">$</span><span class="va">buzz</span> <span class="op">&lt;-</span> <span class="va">buzz</span></span></code></pre></div>
 <p>If we now re-execute <code><a href="../reference/fp_summarize.html">fp_summarize()</a></code> on the updated
 data.table, we’ll find that it can see and understand the buzz column,
 and it will handle buzzes in a similar way as it handles detections; by
 summing them up per minute.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dpm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fp_summarize.html">fp_summarize</a></span><span class="op">(</span><span class="va">nbhf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">dpm2</span><span class="op">$</span><span class="va">dpm</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 472</span></span>
@@ -300,19 +300,19 @@ can use that as a basis to further aggregate data to some time scale
 that we think is sensible for our purposes, whether it be plotting
 trends or statistical analysis. In this case, let’s sum up DPMs and BPMs
 per day.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dpm_per_day</span> <span class="op">&lt;-</span> <span class="va">dpm2</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>dpm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">dpm</span><span class="op">)</span>, bpm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">bpm</span><span class="op">)</span><span class="op">)</span>, <span class="fu">.</span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <p>Let’s illustrate these data with a simple stacked barplot. Note that
 we subtract BPM from DPMs to avoid double-counting detections, since a
 BPM implies a DPM (a porpoise must obviously have been detected for
 there to be porpoise clicks to classify as buzzes).</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>    <span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">dpm_per_day</span><span class="op">$</span><span class="va">dpm</span> <span class="op">-</span> <span class="va">dpm_per_day</span><span class="op">$</span><span class="va">bpm</span>, <span class="va">dpm_per_day</span><span class="op">$</span><span class="va">bpm</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">mat</span>, las <span class="op">=</span> <span class="fl">2</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">250</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tomato2"</span>, <span class="st">"dodgerblue4"</span><span class="op">)</span>,</span>
 <span>            names.arg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">dpm_per_day</span><span class="op">$</span><span class="va">date</span>, <span class="st">"%b %d"</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab <span class="op">=</span> <span class="st">"DPMs"</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, inset <span class="op">=</span> <span class="fl">0.05</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tomato2"</span>, <span class="st">"dodgerblue4"</span><span class="op">)</span>,</span>
 <span>           legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DPM"</span>, <span class="st">"BPM"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fpod_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="100%">
+<p><img src="fpod_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="" width="100%">
 We see that we have the most NBHF detections on December 11, when we
 have almost 200 DPMs. This corresponds to 200/1440 = 14%, i.e. porpoises
 were detected at this site for 14% of the day that day. The highest

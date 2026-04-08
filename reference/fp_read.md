@@ -45,16 +45,18 @@ if available):
 - clicks: A data.frame (or data.table) with data about each click. See
   details.
 
-- wav (only FPx files): pseudo-wav data - inter-peak-intervals and raw
-  amplitudes for a subset of clicks
+- wav (only FPx files): pseudo-wav data - inter-peak-intervals (in 250
+  ns units) and raw amplitudes for a subset of clicks
 
 - env: misc data, angle from vertical (in degrees), ambient temperature
-  (in deg C), battery voltage per stack (in units of 10 millivolts),
-  which battery column is in use, and the pod on/off state
+  (in deg C), battery voltage per stack (in units of volts), which
+  battery column is in use, and the pod on/off state.
 
 ## Details
 
 The clicks data.frame contains the following columns:
+
+- pod: the ID number of the pod
 
 - time: The time and date of the click, at microsecond resolution. Note
   that R might only display dates and times to a second precision, but
@@ -162,18 +164,18 @@ dat$header
 # show battery levels and recorded temperatures for each minute
 dat$env
 #>        minute angle  degC bat1v bat2v bat_use pod_on
-#>         <int> <int> <int> <int> <int>   <int> <lgcl>
-#>     1:      1    36     6    79    70       1   TRUE
-#>     2:      2    36     6    79    69       1   TRUE
-#>     3:      3    28     6    79    69       1   TRUE
-#>     4:      4    36     6    79    70       1   TRUE
-#>     5:      5    35     6    79    70       1   TRUE
+#>         <int> <int> <int> <num> <num>   <int> <lgcl>
+#>     1:      1    36     6  1.58  1.40       1   TRUE
+#>     2:      2    36     6  1.58  1.38       1   TRUE
+#>     3:      3    28     6  1.58  1.38       1   TRUE
+#>     4:      4    36     6  1.58  1.40       1   TRUE
+#>     5:      5    35     6  1.58  1.40       1   TRUE
 #>    ---                                              
-#> 14396:  14396     0     5    79    67       1   TRUE
-#> 14397:  14397    14     5    79    67       1   TRUE
-#> 14398:  14398    14     5    79    66       1   TRUE
-#> 14399:  14399    20     5    79    67       1   TRUE
-#> 14400:  14400    25     5    79    67       1   TRUE
+#> 14396:  14396     0     5  1.58  1.34       1   TRUE
+#> 14397:  14397    14     5  1.58  1.34       1   TRUE
+#> 14398:  14398    14     5  1.58  1.32       1   TRUE
+#> 14399:  14399    20     5  1.58  1.34       1   TRUE
+#> 14400:  14400    25     5  1.58  1.34       1   TRUE
 
 # tally up the number of clicks in each species category
 table(dat$clicks$species)
