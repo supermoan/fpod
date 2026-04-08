@@ -59,10 +59,6 @@ Next we have a data.table called `env`. This table lists the angle from vertical
 ```{r}
 str(dat$env)
 ```
-To understand the battery levels better, we can calculate the average voltage (in units of volts) per battery, which is probably what we'd use if we wanted to plot battery usage over time.
-``` {r}
-head(dat$env$bat1v/10/5)
-```
 
 Now let's turn our attention to the next element: The wav data.table holds extra information (inter-peak-intervals, IPI + sound pressure level, SPL) for a sample of recorded clicks, usually less than 1%, but possibly more or less depending on user configuration.
 ``` {r}

@@ -6,7 +6,7 @@
 \alias{fpod-package}
 \title{fpod: Read and process FPOD and CPOD data}
 \description{
-Description: This package reads FPOD and CPOD data into R directly from the
+This package reads FPOD and CPOD data into R directly from the
 FPOD data files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data
 files contain binary data, so they can't trivially be read into R using the
 usual approach (e.g. fread or read.csv). This package decodes the binary
@@ -21,13 +21,14 @@ importantly, 2) makes data processing transparent and reproducible.
 \details{
 For more information, see:
 \itemize{
-\item vignette(s): Type vignette(package="fpod")
+\item vignette 1: Type vignette("fpod", package = "fpod")
+\item vignette 2: Type vignette("advanced-usage", package = "fpod")
 \item help functions for any of the functions listed under \verb{See Also}
-\item package website \url{https://supermoan.github.io/fpod/}
+\item package website at \url{https://supermoan.github.io/fpod/}
 }
 }
 \seealso{
-\code{\link[=fp_read]{fp_read()}}, \code{\link[=fp_summarize]{fp_summarize()}}, \code{\link[=fp_find_buzzes]{fp_find_buzzes()}}
+\code{\link[=fp_read]{fp_read()}}, \code{\link[=fp_summarize]{fp_summarize()}}, \code{\link[=fp_find_buzzes]{fp_find_buzzes()}}, \code{\link[=fp_plot]{fp_plot()}}
 }
 \author{
 André Moan \href{mailto:andre.moan@hi.no}{andre.moan@hi.no} \href{https://orcid.org/0000-0001-9506-2949}{ORCID}

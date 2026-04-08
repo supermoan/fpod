@@ -383,11 +383,14 @@ int getFPODData(std::ifstream& fid,
             } else if (buf[0] == 250) {
 
                 // wav data precedes next click
-                if (dat.has_wav[current_click+1] != TRUE) {
-                    dat.has_wav[current_click+1] = TRUE;
+                // not sure why, but we have to use current_click here
+                // not current_click +1, which would be what I expect.
+                if (dat.has_wav[current_click] != TRUE) {
+                    dat.has_wav[current_click] = TRUE;
                     // +2 since we're talking about click numbers, not indices,
                     // and since we're also talking about the next click
-                    dat.wav_data.emplace_back(WavData(current_click + 2));
+                    //dat.wav_data.emplace_back(WavData(current_click + 2));
+                    dat.wav_data.emplace_back(WavData(current_click + 1));
                 }
 
                 dat.wav_data.back().chunks.emplace_back();

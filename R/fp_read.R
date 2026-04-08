@@ -21,10 +21,11 @@
 #' * wav (only FPx files): pseudo-wav data - inter-peak-intervals (in 250 ns units)
 #'   and raw amplitudes for a subset of clicks
 #' * env: misc data, angle from vertical (in degrees), ambient temperature (in deg C),
-#'   battery voltage per stack (in units of 10 millivolts), which battery column
-#'   is in use, and the pod on/off state
+#'   battery voltage per stack (in units of volts), which battery column
+#'   is in use, and the pod on/off state.
 #'
 #' @details The clicks data.frame contains the following columns:
+#' * pod: the ID number of the pod
 #' * time: The time and date of the click, at microsecond resolution. Note that R might
 #'   only display dates and times to a second precision, but any date or time
 #'   calculations will use the full precision.
@@ -134,6 +135,13 @@ fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
             ret$env[, c("prior_min", "next_min") := NULL]
         }
 
+        if ("bat1v" %in% colnames(ret$env)) {
+            ret$env[, bat1v := bat1v/50]
+        }
+        if ("bat2v" %in% colnames(ret$env)) {
+            ret$env[, bat2v := bat2v/50]
+        }
+
         if ("angle" %in% colnames(ret$env)) {
             ret$env[fpod_conversion_tables$angles,
                     on = c("angle"="cp3_angle"), angle := actual_angle]
@@ -142,13 +150,13 @@ fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
 
     if ("wav" %in% names(ret) && nrow(ret$wav) > 0) {
        data.table::setDT(ret$wav)
-        if ("clicks" %in% names(ret)) {
-            ret$wav[ret$clicks, on = "click_no", ncyc := i.ncyc]
-            ret$wav[, cycle := 1:.N, click_no]
-            ret$wav[, first_cycle := pmax(1, .N-ncyc+1), click_no]
-            ret$wav <- ret$wav[cycle >= first_cycle]
-            ret$wav[, c("cycle", "ncyc", "first_cycle") := NULL]
-        }
+        #if ("clicks" %in% names(ret)) {
+            #ret$wav[ret$clicks, on = "click_no", ncyc := i.ncyc]
+            #ret$wav[, cycle := 1:.N, click_no]
+            #ret$wav[, first_cycle := pmax(1, .N-ncyc+1), click_no]
+            #ret$wav <- ret$wav[cycle >= first_cycle]
+            #ret$wav[, c("cycle", "ncyc", "first_cycle") := NULL]
+        #}
     }
 
     ret

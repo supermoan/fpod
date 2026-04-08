@@ -28,11 +28,11 @@ data.tables, if available):
 \item header: a list with pod name, coordinates, starting time, stopping time, user
 notes, etc.
 \item clicks: A data.frame (or data.table) with data about each click. See details.
-\item wav (only FPx files): pseudo-wav data - inter-peak-intervals and raw amplitudes
-for a subset of clicks
+\item wav (only FPx files): pseudo-wav data - inter-peak-intervals (in 250 ns units)
+and raw amplitudes for a subset of clicks
 \item env: misc data, angle from vertical (in degrees), ambient temperature (in deg C),
-battery voltage per stack (in units of 10 millivolts), which battery column
-is in use, and the pod on/off state
+battery voltage per stack (in units of volts), which battery column
+is in use, and the pod on/off state.
 }
 }
 \description{
@@ -41,6 +41,7 @@ This function reads an FPOD or CPOD data file (FP1, FP3, CP1, CP3) into R.
 \details{
 The clicks data.frame contains the following columns:
 \itemize{
+\item pod: the ID number of the pod
 \item time: The time and date of the click, at microsecond resolution. Note that R might
 only display dates and times to a second precision, but any date or time
 calculations will use the full precision.
