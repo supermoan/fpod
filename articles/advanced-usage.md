@@ -10,6 +10,7 @@ and tricks to deal with multiple files.
 First, load the package and get the path to some example data.
 
 ``` r
+
 library(fpod)
 fn <- fp_example("gullars_period1.FP3") # <- example FP3 file
 ```
@@ -21,6 +22,7 @@ files situation by re-reading that same file multiple times, and running
 our combination logic on the duplicated data set.
 
 ``` r
+
 fpod_files <- rep(fn, 5) # simulate 5 FPOD files
 basename(fpod_files)
 #> [1] "gullars_period1.FP3" "gullars_period1.FP3" "gullars_period1.FP3"
@@ -34,6 +36,7 @@ calling [`list.files()`](https://rdrr.io/r/base/list.files.html) on the
 directory where we’ve stored the FP3 files, e.g.:
 
 ``` r
+
 #fpod_files <- list.files("/users/andre/projects/fpod_troms/data", pattern = "FP3$", full = TRUE, recursive = TRUE)
 ```
 
@@ -47,57 +50,58 @@ can now use, for example, `lapply` to easily read our list of files into
 R.
 
 ``` r
+
 dat <- lapply(fpod_files, fp_read)
 str(dat, 2)
 #> List of 5
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 ```
@@ -114,6 +118,7 @@ noticable, but the computational cost increases with increasing data
 size.
 
 ``` r
+
 dat <- vector(mode = "list", length = length(fpod_files))
 for (i in 1:length(fpod_files)) {
     dat[[i]] <- fp_read(fpod_files[[i]])
@@ -123,51 +128,51 @@ str(dat, 2)
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 #>  $ :List of 4
 #>   ..$ header:List of 15
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x55692872bef0> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x563caf271ef0> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 ```
@@ -186,6 +191,7 @@ enormous data.table.
 This is pretty simple:
 
 ``` r
+
 library(data.table)
 #> 
 #> Attaching package: 'data.table'
@@ -200,6 +206,7 @@ nbhf <- lapply(dat, function(x) {
 Let’s have a look:
 
 ``` r
+
 nbhf[, 1:7] # show only first 7 cols for brevity
 #>           pod                time minute microsec click_no train_id species
 #>         <int>              <POSc>  <int>    <int>    <int>    <int>  <char>
@@ -224,6 +231,7 @@ but if they aren’t, we can add a check in the body of the lapply-loop to
 handle them gracefully.
 
 ``` r
+
 nbhf <- lapply(dat, function(x) {
     clicks <- x$clicks[species == "NBHF"]
     if (nrow(clicks) == 0) {
@@ -239,6 +247,7 @@ OtherCet and Sonar), and buzz-positive- minutes (BPMs) for NBHF clicks.
 Here’s one way we could do that, again using `lapply`:
 
 ``` r
+
 dpm <- lapply(dat, function(x) {
     nbhf <- x$clicks[species == "NBHF"]
     dolphins <- x$clicks[species == "OtherCet"]

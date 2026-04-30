@@ -31,6 +31,25 @@ fp_plot(x, click_no = NULL, legend.pos = "topleft")
   [`legend()`](https://rdrr.io/r/graphics/legend.html) for details. If
   legend.pos is logical and FALSE, then the legend is suppressed.
 
+## Value
+
+Invisibly returns a numeric vector with the frequency values used for
+plotting
+
+## Details
+
+According to the [FPOD software
+guide](https://www.chelonia.co.uk/f-pod/existing-user-resources/), extra
+data are stored for a small percentage of clicks (about 1%). The clicks
+to record are selected by a "real-time train detection algorithm"
+running on the FPOD. The information stored is the amplitude and timing
+(at 250 nanosecond resolution) of the peak of the soundwave. This allows
+for the reconstruction of the waveform by fitting sine waves to the
+points stored.
+
+Note that there's an option in the FPOD app to configure the FPOD to
+record `all` clicks rather than just a small sample..
+
 ## See also
 
 [`fp_read()`](https://supermoan.github.io/fpod/reference/fp_read.md)

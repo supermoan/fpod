@@ -2,17 +2,20 @@
 
 ## Authors
 
-- **André Moan**. Maintainer.
+- **André Moan**. Author, maintainer, copyright holder.
 
 ## Citation
 
-Moan A (2026). *fpod: Read and process FPOD and CPOD data*. R package
-version 1.0.0.0, <https://supermoan.github.io/fpod/>.
+Source:
+[`DESCRIPTION`](https://github.com/supermoan/fpod/blob/main/DESCRIPTION)
+
+Moan A (2026). *fpod: Read and Process 'FPOD' and 'CPOD' Data*. R
+package version 1.0.0.0, <https://github.com/supermoan/fpod>.
 
     @Manual{,
-      title = {fpod: Read and process FPOD and CPOD data},
+      title = {fpod: Read and Process 'FPOD' and 'CPOD' Data},
       author = {André Moan},
       year = {2026},
       note = {R package version 1.0.0.0},
-      url = {https://supermoan.github.io/fpod/},
+      url = {https://github.com/supermoan/fpod},
     }

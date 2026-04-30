@@ -46,6 +46,7 @@ we’ll use the sample data bundled with the package, which contains 10
 days of FPOD data from a quiet site in northern Troms county, in Norway.
 
 ``` r
+
 library(fpod)
 fn <- fp_example("gullars_period1.FP3")
 dat <- fp_read(fn)
@@ -56,6 +57,7 @@ This gives us a list with four elements, each of which is a data.table
 being read).
 
 ``` r
+
 names(dat)
 #> [1] "header" "env"    "wav"    "clicks"
 ```
@@ -63,6 +65,7 @@ names(dat)
 Let’s inspect each of these elements in turn.
 
 ``` r
+
 str(dat$header)
 #> List of 15
 #>  $ pod_id          : int 7660
@@ -91,6 +94,7 @@ files. Note that the time-specification stored in `first_logged_min` and
 can easily convert this to a more human-friendly date format:
 
 ``` r
+
 as.POSIXct("1900-01-01", tz="") + dat$header$first_logged_min * 60
 #> [1] "2024-12-07 06:00:00 UTC"
 ```
@@ -105,6 +109,7 @@ columns, per minute. The minutes are relative to when the pod was
 started, i.e. `first_logged_min`.
 
 ``` r
+
 str(dat$env)
 #> Classes 'data.table' and 'data.frame':   14400 obs. of  7 variables:
 #>  $ minute : int  1 2 3 4 5 6 7 8 9 10 ...
@@ -114,7 +119,7 @@ str(dat$env)
 #>  $ bat2v  : num  1.4 1.38 1.38 1.4 1.4 1.4 1.38 1.38 1.38 1.38 ...
 #>  $ bat_use: int  1 1 1 1 1 1 1 1 1 1 ...
 #>  $ pod_on : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x55b2ffdb0ef0>
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5628eba2fef0>
 ```
 
 Now let’s turn our attention to the next element: The wav data.table
@@ -123,17 +128,19 @@ level, SPL) for a sample of recorded clicks, usually less than 1%, but
 possibly more or less depending on user configuration.
 
 ``` r
+
 str(dat$wav)
 #> Classes 'data.table' and 'data.frame':   15995 obs. of  3 variables:
 #>  $ click_no: int  547 547 547 547 547 547 547 736 736 736 ...
 #>  $ IPI     : int  255 29 29 30 30 31 34 255 255 255 ...
 #>  $ SPL     : int  8 37 45 46 40 27 24 3 12 4 ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x55b2ffdb0ef0>
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5628eba2fef0>
 ```
 
 Finally, and most importantly, we have the clicks data:
 
 ``` r
+
 str(dat$clicks)
 #> Classes 'data.table' and 'data.frame':   82637 obs. of  14 variables:
 #>  $ pod          : int  7660 7660 7660 7660 7660 7660 7660 7660 7660 7660 ...
@@ -150,7 +157,7 @@ str(dat$clicks)
 #>  $ khz          : num  98 114 133 103 111 114 103 100 108 103 ...
 #>  $ amp_at_max   : int  30 43 25 44 30 22 26 24 34 37 ...
 #>  $ has_wav      : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x55b2ffdb0ef0> 
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5628eba2fef0> 
 #>  - attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
 #>  - attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
 ```
@@ -179,6 +186,7 @@ region where these data were collected, this corresponds to selecting
 only harbour porpoise clicks.
 
 ``` r
+
 nbhf <- dat$clicks[species == "NBHF" & quality_level >= 2]
 dpm <- fp_summarize(nbhf)
 print(dpm)
@@ -204,6 +212,7 @@ expect some rows to be nonzero.
 Let’s just verify to be sure.
 
 ``` r
+
 sum(dpm$dpm)
 #> [1] 472
 ```
@@ -228,6 +237,7 @@ doesn’t care about that, it will try to find buzzes for whatever clicks
 data you give it.
 
 ``` r
+
 buzz <- fp_find_buzzes(nbhf)
 str(buzz)
 #>  int [1:43216] 0 0 0 0 0 0 0 0 0 0 ...
@@ -242,6 +252,7 @@ that the length of this vector is identical to the number of rows in the
 clicks data.table that we used.
 
 ``` r
+
 nrow(nbhf)
 #> [1] 43216
 length(buzz)
@@ -255,6 +266,7 @@ We can add the buzz info to the NBHF clicks data.table we’re
 investigating.
 
 ``` r
+
 nbhf$buzz <- buzz
 ```
 
@@ -265,6 +277,7 @@ buzz column, and it will handle buzzes in a similar way as it handles
 detections; by summing them up per minute.
 
 ``` r
+
 dpm2 <- fp_summarize(nbhf)
 sum(dpm2$dpm)
 #> [1] 472
@@ -278,6 +291,7 @@ think is sensible for our purposes, whether it be plotting trends or
 statistical analysis. In this case, let’s sum up DPMs and BPMs per day.
 
 ``` r
+
 dpm_per_day <- dpm2[, .(dpm = sum(dpm), bpm = sum(bpm)), .(date = as.Date(time))]
 ```
 
@@ -287,6 +301,7 @@ implies a DPM (a porpoise must obviously have been detected for there to
 be porpoise clicks to classify as buzzes).
 
 ``` r
+
     mat <- matrix(c(dpm_per_day$dpm - dpm_per_day$bpm, dpm_per_day$bpm), nrow=2, byrow=TRUE)
     barplot(mat, las = 2, ylim=c(0,250), col = c("tomato2", "dodgerblue4"),
             names.arg = format(dpm_per_day$date, "%b %d"), xlab="", ylab = "DPMs")
@@ -313,4 +328,4 @@ and `fp_summarize` for more details on each of these functions.
 ## Disclaimer
 
 Note that this package is not affiliated with the manufacturer of the
-CPOD and FPOD [Chelonia](https://chelonia.co.uk/).
+CPOD and FPOD [Chelonia](https://www.chelonia.co.uk/).

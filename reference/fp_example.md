@@ -14,6 +14,11 @@ fp_example(path = NULL)
 
   Name of the file. If NULL, all example files are listed.
 
+## Value
+
+A character vector, containing the path(s) that matched, or the empty
+string, "", if none matched.
+
 ## Examples
 
 ``` r

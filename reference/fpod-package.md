@@ -1,25 +1,28 @@
-# fpod: Read and process FPOD and CPOD data
+# fpod: Read and Process 'FPOD' and 'CPOD' Data
 
-This package reads FPOD and CPOD data into R directly from the FPOD data
-files (i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data files
-contain binary data, so they can't trivially be read into R using the
-usual approach (e.g. fread or read.csv). This package decodes the binary
-data and imports all the data in one go (i.e. header/metadata, clicks,
-KERNO classifications, environmental data and pseudo-WAV data). It is
-then trivial to aggregate data as you please, e.g. DPMs per time block.
-The advantage of handling data processing in R is a long topic, but
-suffice it to say that it 1) simplifies things (many fewer steps, as
-different vars have to be exported in multiple goes in the official FPOD
-app), and more importantly, 2) makes data processing transparent and
-reproducible.
+Read 'FPOD' and 'CPOD' data into 'R' directly from the 'FPOD' data files
+(i.e. the .CP1, .CP3, .FP1 and .FP3 files). The FPOD data files contain
+binary data, so they can't trivially be read into 'R' using the usual
+approach (e.g. fread or read.csv). This package decodes the binary data
+and imports all the data in one go (i.e. header/metadata, clicks,
+'KERNO' classifications, environmental data and pseudo-WAV data). It is
+then trivial to aggregate data as you please, e.g.
+detection-positive-minutes per time block. The advantage of handling
+data processing in 'R' is a long topic, but suffice it to say that it 1)
+simplifies things (many fewer steps, as different vars have to be
+exported in multiple goes in the official 'FPOD' app), and more
+importantly, 2) makes data processing transparent and reproducible.
+References: Pirotta et al. 2014 <doi:10.1111/1365-2435.12146>.
 
 ## Details
 
 For more information, see:
 
-- vignette 1: Type vignette("fpod", package = "fpod")
+- vignette 1 - getting started: Type
+  [`vignette("fpod", package = "fpod")`](https://supermoan.github.io/fpod/articles/fpod.md)
 
-- vignette 2: Type vignette("advanced-usage", package = "fpod")
+- vignette 2 - advanced usage: Type
+  [`vignette("advanced-usage", package = "fpod")`](https://supermoan.github.io/fpod/articles/advanced-usage.md)
 
 - help functions for any of the functions listed under `See Also`
 

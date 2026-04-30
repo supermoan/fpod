@@ -28,6 +28,7 @@ cycles). By default, FPODs collect extra data for about 1% of detected clicks.">
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/supermoan/fpod/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -37,7 +38,7 @@ cycles). By default, FPODs collect extra data for about 1% of detected clicks.">
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Plot waveform and spectrum for a click</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/supermoan/fpod/blob/main/R/fp_plot.R" class="external-link"><code>R/fp_plot.R</code></a></small>
       <div class="d-none name"><code>fp_plot.Rd</code></div>
     </div>
 
@@ -71,6 +72,22 @@ This parameter is passed as <code>x</code> when calling <code><a href="https://r
 details. If legend.pos is logical and FALSE, then the legend is suppressed.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Invisibly returns a numeric vector with the frequency values used
+for plotting</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>According to the <a href="https://www.chelonia.co.uk/f-pod/existing-user-resources/" class="external-link">FPOD software guide</a>,
+extra data are stored for a small percentage of clicks (about 1%). The clicks to
+record are selected by a "real-time train detection algorithm" running on the FPOD.
+The information stored is the amplitude and timing (at 250 nanosecond resolution)
+of the peak of the soundwave. This allows for the reconstruction of the waveform
+by fitting sine waves to the points stored.</p>
+<p>Note that there's an option in the FPOD app to configure the FPOD to record
+<code>all</code> clicks rather than just a small sample..</p>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="fp_read.html">fp_read()</a></code></p></div>
