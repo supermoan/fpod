@@ -9,6 +9,10 @@ fp_example(path = NULL)
 \arguments{
 \item{path}{Name of the file. If NULL, all example files are listed.}
 }
+\value{
+A character vector, containing the path(s) that matched, or the
+empty string, "", if none matched.
+}
 \description{
 Get path to fpod example
 }

@@ -16,10 +16,25 @@ in sequential order, one at a time.}
 This parameter is passed as \code{x} when calling \code{\link[=legend]{legend()}}. See \code{\link[=legend]{legend()}} for
 details. If legend.pos is logical and FALSE, then the legend is suppressed.}
 }
+\value{
+Invisibly returns a numeric vector with the frequency values used
+for plotting
+}
 \description{
 This function constructs and plots the waveform and spectrum for a click for
 which extra information has been recorded (IPI and SPL values for up to 21
 cycles). By default, FPODs collect extra data for about 1\% of detected clicks.
+}
+\details{
+According to the \href{https://www.chelonia.co.uk/f-pod/existing-user-resources/}{FPOD software guide},
+extra data are stored for a small percentage of clicks (about 1\%). The clicks to
+record are selected by a "real-time train detection algorithm" running on the FPOD.
+The information stored is the amplitude and timing (at 250 nanosecond resolution)
+of the peak of the soundwave. This allows for the reconstruction of the waveform
+by fitting sine waves to the points stored.
+
+Note that there's an option in the FPOD app to configure the FPOD to record
+\code{all} clicks rather than just a small sample..
 }
 \examples{
 # read a FP3 file

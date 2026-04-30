@@ -11,6 +11,20 @@
 #' This parameter is passed as `x` when calling [legend()]. See [legend()] for
 #' details. If legend.pos is logical and FALSE, then the legend is suppressed.
 #'
+#' @returns Invisibly returns a numeric vector with the frequency values used
+#' for plotting
+#'
+#' @details
+#' According to the [FPOD software guide](https://www.chelonia.co.uk/f-pod/existing-user-resources/),
+#' extra data are stored for a small percentage of clicks (about 1%). The clicks to
+#' record are selected by a "real-time train detection algorithm" running on the FPOD.
+#' The information stored is the amplitude and timing (at 250 nanosecond resolution)
+#' of the peak of the soundwave. This allows for the reconstruction of the waveform
+#' by fitting sine waves to the points stored.
+#'
+#' Note that there's an option in the FPOD app to configure the FPOD to record
+#' `all` clicks rather than just a small sample..
+#'
 #' @examples
 #' # read a FP3 file
 #' fn <- fp_example("gullars_period1.FP3")
@@ -88,7 +102,8 @@ fp_plot <- function(x, click_no = NULL, legend.pos = "topleft") {
         t <- seq(0, ipi - 1)
         cycle_wave <- spl_expanded * sin(2 * pi * (1/ipi) * t)
         data.table(cycle = i, t = t, wave = cycle_wave)
-    }) |> rbindlist()
+    })
+    waveform <- rbindlist(waveform)
 
     waveform$wave[nrow(waveform)] <- 0
     waveform[, wave_scaled := wave*200/max(wave)]
@@ -111,5 +126,6 @@ fp_plot <- function(x, click_no = NULL, legend.pos = "topleft") {
     if (!(inherits(legend.pos, "logical") && legend.pos == FALSE)) {
         legend(x = legend.pos, legend = info, inset = 0.05)
     }
+    invisible(waveform$wave_scaled)
 }
 

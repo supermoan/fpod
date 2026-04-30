@@ -134,7 +134,7 @@ We see that we have the most NBHF detections on December 11, when we have almost
 Ok, so that's an overview of the three functions that are currently available in the fpod package. The package really is primarily meant to get the CP3/FP3 data into R in a streamlined manner, and to help facilitate transparency and reproducible code. But the formal analysis is left to the user! Have a look at `?fp_read`, `?fp_find_buzzes` and `fp_summarize` for more details on each of these functions. 
 
 # Disclaimer
-Note that this package is not affiliated with the manufacturer of the CPOD and FPOD [Chelonia](https://chelonia.co.uk/).
+Note that this package is not affiliated with the manufacturer of the CPOD and FPOD [Chelonia](https://www.chelonia.co.uk/).
 
 
 

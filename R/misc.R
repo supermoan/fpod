@@ -4,12 +4,12 @@ utils::globalVariables(c(".", "fpod_conversion_tables", "amp_at_max", "khz",
                          "amp_reversals", "duration", "ncyc", "i.ncyc", "cycle",
                          "click_no", "first_cycle", "buzz", "time", "i.dpm",
                          "i.bpm", "amp_at_max", "real_amp", "J", "val", "angle",
-                         "actual_angle", "wave", "wave_scaled"))
+                         "actual_angle", "wave", "wave_scaled", "bat1v", "bat2v"))
 
 #' Internal helper function to lookup kHz values from inter-peak-intervals (IPIs)
 #'
 #' @param ipi A vector of IPIs
-#' @return A vector of kHz values of the asme length as `ipi`
+#' @returns A vector of kHz values of the asme length as `ipi`
 #' @noRd
 get_khz_from_ipi <- function(ipi) {
     fpod_conversion_tables$ipi[ipi]
@@ -20,7 +20,7 @@ get_khz_from_ipi <- function(ipi) {
 #' @param ipi numeric vector of inter-peak-intervals
 #' @param use_ext_amps logical, TRUE or FALSE
 #'
-#' @return a vector of extrapolated amplitudes
+#' @returns a vector of extrapolated amplitudes
 #' @noRd
 #'
 get_extrapolated_amp_from_raw_amp <- function(raw_amp, ipi, use_ext_amps) {
