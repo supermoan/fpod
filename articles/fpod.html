@@ -172,7 +172,7 @@ the pod was started, i.e. <code>first_logged_min</code>.</p>
 <span><span class="co">#&gt;  $ bat2v  : num  1.4 1.38 1.38 1.4 1.4 1.4 1.38 1.38 1.38 1.38 ...</span></span>
 <span><span class="co">#&gt;  $ bat_use: int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ pod_on : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
-<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5628eba2fef0&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x556cb008cef0&gt;</span></span></code></pre></div>
 <p>Now let’s turn our attention to the next element: The wav data.table
 holds extra information (inter-peak-intervals, IPI + sound pressure
 level, SPL) for a sample of recorded clicks, usually less than 1%, but
@@ -183,7 +183,7 @@ possibly more or less depending on user configuration.</p>
 <span><span class="co">#&gt;  $ click_no: int  547 547 547 547 547 547 547 736 736 736 ...</span></span>
 <span><span class="co">#&gt;  $ IPI     : int  255 29 29 30 30 31 34 255 255 255 ...</span></span>
 <span><span class="co">#&gt;  $ SPL     : int  8 37 45 46 40 27 24 3 12 4 ...</span></span>
-<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5628eba2fef0&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x556cb008cef0&gt;</span></span></code></pre></div>
 <p>Finally, and most importantly, we have the clicks data:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">clicks</span><span class="op">)</span></span>
@@ -202,7 +202,7 @@ possibly more or less depending on user configuration.</p>
 <span><span class="co">#&gt;  $ khz          : num  98 114 133 103 111 114 103 100 108 103 ...</span></span>
 <span><span class="co">#&gt;  $ amp_at_max   : int  30 43 25 44 30 22 26 24 34 37 ...</span></span>
 <span><span class="co">#&gt;  $ has_wav      : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5628eba2fef0&gt; </span></span>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x556cb008cef0&gt; </span></span>
 <span><span class="co">#&gt;  - attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
 <span><span class="co">#&gt;  - attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span></code></pre></div>
 <p>And that’s pretty much it. Now you have your CPOD/FPOD data in R and
