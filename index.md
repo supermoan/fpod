@@ -2,9 +2,9 @@
 
 The goal of fpod is to provide a means to directly load FPOD and CPOD
 data files into R. The FPOD data files contain binary data, so they
-can’t trivially be read into R using the usual approach (e.g. fread or
-read.csv). This package decodes the binary data and imports all the data
-in one go (i.e. header/metadata, clicks, KERNO classifications,
+can’t trivially be read into R using the usual approach, e.g. fread() or
+read.csv(). This package decodes the binary data and imports all the
+data in one go (i.e. header/metadata, clicks, KERNO classifications,
 environmental data and pseudo-WAV data). It is then trivial to aggregate
 and visualize data as you please, e.g. summing DPMs per time block or
 showing reconstructed waveforms. The advantage of handling data
@@ -21,6 +21,8 @@ importantly, 2) makes data processing 100% transparent and reproducible.
   calculates minute-resolution summaries of clicks
 - [`fp_find_buzzes()`](https://supermoan.github.io/fpod/reference/fp_find_buzzes.md)
   finds harbour porpoise buzzes in a subset of clicks
+- [`fp_plot()`](https://supermoan.github.io/fpod/reference/fp_plot.md)
+  plots the waveform and spectrum for a click
 
 ## Installation
 

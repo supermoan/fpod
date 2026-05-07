@@ -57,7 +57,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="fpod">fpod<a class="anchor" aria-label="anchor" href="#fpod"></a>
 </h1></div>
-<p>The goal of fpod is to provide a means to directly load FPOD and CPOD data files into R. The FPOD data files contain binary data, so they can’t trivially be read into R using the usual approach (e.g. fread or read.csv). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate and visualize data as you please, e.g. summing DPMs per time block or showing reconstructed waveforms. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing 100% transparent and reproducible.</p>
+<p>The goal of fpod is to provide a means to directly load FPOD and CPOD data files into R. The FPOD data files contain binary data, so they can’t trivially be read into R using the usual approach, e.g. fread() or read.csv(). This package decodes the binary data and imports all the data in one go (i.e. header/metadata, clicks, KERNO classifications, environmental data and pseudo-WAV data). It is then trivial to aggregate and visualize data as you please, e.g. summing DPMs per time block or showing reconstructed waveforms. The advantage of handling data processing in R is a long topic, but suffice it to say that it 1) simplifies things (many fewer steps, as different vars have to be exported in multiple goes in the official FPOD app), and more importantly, 2) makes data processing 100% transparent and reproducible.</p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -68,6 +68,8 @@
 <code><a href="reference/fp_summarize.html">fp_summarize()</a></code> calculates minute-resolution summaries of clicks</li>
 <li>
 <code><a href="reference/fp_find_buzzes.html">fp_find_buzzes()</a></code> finds harbour porpoise buzzes in a subset of clicks</li>
+<li>
+<code><a href="reference/fp_plot.html">fp_plot()</a></code> plots the waveform and spectrum for a click</li>
 </ul>
 </div>
 <div class="section level2">
