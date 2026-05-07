@@ -10,7 +10,7 @@ Authors@R:
 Description: Read 'FPOD' and 'CPOD' data into 'R' directly from the
     'FPOD' data files (i.e. .CP1, .CP3, .FP1 and .FP3 files). The 'FPOD' data
     files contain binary data, so they can't trivially be read into 'R' using the
-    usual approach (e.g. fread or read.csv). This package decodes the binary
+    usual approach, e.g. fread() or read.csv(). This package decodes the binary
     data and imports all the data in one go (i.e. header/metadata, clicks, 
     'KERNO' classifications, environmental data and pseudo-WAV data). It is then 
     trivial to aggregate data as you please, e.g. detection-positive-minutes per

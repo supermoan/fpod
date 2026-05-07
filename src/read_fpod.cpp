@@ -244,7 +244,7 @@ public:
             Named("has_wav") = has_wav[filter]
         );
 
-        if (temp_deg_c.size() > 0) {
+        //if (temp_deg_c.size() > 0) {
 
             DataFrame env = DataFrame::create(
                 Named("minute") = seq(1, temp_deg_c.size()),
@@ -261,7 +261,7 @@ public:
             );
 
             ret.push_back(env, "env");
-        }
+        //}
 
         ret.push_back(wavToList(wav_data), "wav");
 
@@ -495,7 +495,17 @@ int getCPODData(std::ifstream& fid,
                 }
 
             } else if (buf[last_byte] == 254) {
+                // minute data
                 current_min++;
+                dat.angle_x.push_back(buf[4]);
+                dat.temp_deg_c.push_back((buf[3]+2) / 5); // +2 to round to nearest int
+                dat.bat1.push_back(buf[3]);
+                dat.bat2.push_back(buf[4]);
+
+                // hard-coded defaults for now
+                dat.prior_min.push_back(1);
+                dat.next_min.push_back(0); // not used for cpod
+                dat.bat_use.push_back(1); // not used for cpod
             }
         }
     }

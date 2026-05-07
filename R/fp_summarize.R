@@ -59,8 +59,6 @@ fp_summarize <- function(x) {
         stop("x has malformed attributes; can't infer on-time")
     }
 
-
-
     if (length(unique(x$pod)) > 1L) {
         warning("not all pod values are identical; only the first one will be used")
     }

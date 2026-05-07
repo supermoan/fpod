@@ -72,7 +72,8 @@ fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
     if (!file.exists(file)) {
         stop("File does not exist!")
     }
-        ret <- readFPOD(file)
+
+    ret <- readFPOD(file)
     type <- toupper(substr(file, nchar(file)-2, nchar(file)))
 
     if ("clicks" %in% names(ret)) {
@@ -126,14 +127,21 @@ fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
         if ("clicks" %in% names(ret) && "minute" %in% colnames(ret$env)) {
             setattr(ret$clicks, "on", ret$env$minute)
         }
-        if (all(c("prior_min", "next_min") %in% colnames(ret$env))) {
 
-            ret$env$pod_on <- as.logical(NA)
-            # note: the order of these two operations is important
-            ret$env$pod_on[2:nrow(ret$env)] <- ret$env$next_min[-nrow(ret$env)]
-            ret$env$pod_on[seq(1,nrow(ret$env)-1)] <- ret$env$prior_min[-1]
+        ret$env$pod_on <- as.logical(NA)
+
+        if (all(c("prior_min", "next_min") %in% colnames(ret$env))) {
+            if (type == "FP3") {
+                # note: the order of these two operations is important
+                ret$env$pod_on[2:nrow(ret$env)] <- ret$env$next_min[-nrow(ret$env)]
+                ret$env$pod_on[seq(1,nrow(ret$env)-1)] <- ret$env$prior_min[-1]
+            } else if (type == "CP3") {
+                ret$env$pod_on[seq(1,nrow(ret$env)-1)] <- ret$env$prior_min[-1]
+            }
             ret$env[, c("prior_min", "next_min") := NULL]
         }
+
+        ret$env[ret$clicks, on = "minute", pod_on := TRUE]
 
         if ("bat1v" %in% colnames(ret$env)) {
             ret$env[, bat1v := bat1v/50]
