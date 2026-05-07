@@ -1,6 +1,6 @@
 Package: fpod
 Title: Read and Process 'FPOD' and 'CPOD' Data
-Version: 1.0.0.0
+Version: 1.0.1
 Date: 2026-04-30
 Authors@R: 
     person(given = "André", 
