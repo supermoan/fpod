@@ -130,8 +130,8 @@ fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
 
         ret$env$pod_on <- as.logical(NA)
 
-        if (all(c("prior_min", "next_min") %in% colnames(ret$env))) {
-            if (type == "FP3") {
+        if (all(c("prior_min", "next_min") %in% colnames(ret$env)) && nrow(ret$env) >= 2) {
+            if (type == "FP3" && nrow(ret$env) >= 2) {
                 # note: the order of these two operations is important
                 ret$env$pod_on[2:nrow(ret$env)] <- ret$env$next_min[-nrow(ret$env)]
                 ret$env$pod_on[seq(1,nrow(ret$env)-1)] <- ret$env$prior_min[-1]
