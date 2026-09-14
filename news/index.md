@@ -1,5 +1,7 @@
 # Changelog
 
+## fpod (development version)
+
 ## fpod 1.0.2
 
 - fp_read() now handles empty FP3 files better to avoid crashing when
