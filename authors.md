@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/supermoan/fpod/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/supermoan/fpod/blob/v1.0.2/DESCRIPTION)
 
 Moan A (2026). *fpod: Read and Process 'FPOD' and 'CPOD' Data*. R
 package version 1.0.2, <https://github.com/supermoan/fpod>.
