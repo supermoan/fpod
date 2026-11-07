@@ -10,12 +10,15 @@ test_that("fp_find_buzzes works", {
 
     # correct usage and expected values
     expect_length(buzz, nrow(x))
-    expect_equal(sum(buzz), 8895L)
+    expect_equal(sum(buzz), 8962L)
 
     # incorrect usage
-    expect_error(fp_find_buzzes(dat), "x must be a data.table with click timestamps in a POSIXct")
-    expect_error(fp_find_buzzes(dat2, "x must be a data table with click timestamps"))
-    expect_error(fp_find_buzzes(dat$clicks, method = 3))
+    expect_error(fp_find_buzzes(dat), "x must be a data.table/data.frame with click timestamps")
+    expect_error(fp_find_buzzes(dat2, "x must be a data.table/data.frame with click timestamps"))
+    expect_error(fp_find_buzzes(x, method = "threshold"), "when using method=\"threshold\", threshold must be defined")
+    expect_error(fp_find_buzzes(x, method = "threshold", threshold = -1), "threshold must be a single positive number")
+    expect_error(fp_find_buzzes(x, method = "threshold", threshold = c(1,2)), "threshold must be a single positive number")
+    expect_error(fp_find_buzzes(x, method = 3), "method not recognized")
 
 })
 
@@ -37,3 +40,5 @@ test_that("fp_find_buzzes trains method works", {
     expect_error(fp_find_buzzes(bad_clicks, method = "trains"), "all inter-click-intervals are NA")
 
 })
+
+

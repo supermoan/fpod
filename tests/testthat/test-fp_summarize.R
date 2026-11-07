@@ -15,7 +15,7 @@ test_that("fp_summarize works", {
     expect_equal(nrow(s1), nrow(s2))
     expect_equal(nrow(s1), 14400L)
     expect_equal(sum(s1$dpm), 726L)
-    expect_equal(sum(s2$bpm), 377L)
+    expect_equal(sum(s2$bpm), 378L)
     expect_equal(nrow(s1), length(on))
 
     # are we actually summing by minute?

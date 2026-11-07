@@ -5,7 +5,10 @@ utils::globalVariables(c(".", "fpod_conversion_tables", "amp_at_max", "khz",
                          "click_no", "first_cycle", "buzz", "time", "i.dpm",
                          "i.bpm", "amp_at_max", "real_amp", "J", "val", "angle",
                          "actual_angle", "wave", "wave_scaled", "bat1v", "bat2v",
-                         "pod_on"))
+                         "pod_on", "group", "buzz_group", "buzz_cumsum",
+                         "is_buzz", "id", "time_buzz", "time_search",
+                         "time_lwr", "time_upr", "group_search", "group_buzz",
+                         "search_id", "buzz_id"))
 
 #' Internal helper function to lookup kHz values from inter-peak-intervals (IPIs)
 #'
