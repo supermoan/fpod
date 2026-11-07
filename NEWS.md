@@ -1,6 +1,5 @@
-# fpod (development version)
-
 # fpod 1.1.0
+
 * several improvements and extensions to fp_find_buzzes():
 * added alias "pirotta1" for method = "clicks"
 * added alias "pirotta2" for method = = "trains"
