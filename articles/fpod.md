@@ -112,14 +112,16 @@ started, i.e. `first_logged_min`.
 
 str(dat$env)
 #> Classes 'data.table' and 'data.frame':   14400 obs. of  7 variables:
-#>  $ minute : int  1 2 3 4 5 6 7 8 9 10 ...
+#>  $ minute : int  0 1 2 3 4 5 6 7 8 9 ...
 #>  $ angle  : int  36 36 28 36 35 26 32 32 34 32 ...
 #>  $ degC   : int  6 6 6 6 6 6 6 6 6 6 ...
 #>  $ bat1v  : num  1.58 1.58 1.58 1.58 1.58 1.58 1.58 1.58 1.6 1.58 ...
 #>  $ bat2v  : num  1.4 1.38 1.38 1.4 1.4 1.4 1.38 1.38 1.38 1.38 ...
 #>  $ bat_use: int  1 1 1 1 1 1 1 1 1 1 ...
 #>  $ pod_on : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x63a7fd67f190>
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5dae8522e180> 
+#>  - attr(*, "index")= int(0) 
+#>   ..- attr(*, "__pod_on")= int(0)
 ```
 
 Now let’s turn our attention to the next element: The wav data.table
@@ -134,7 +136,7 @@ str(dat$wav)
 #>  $ click_no: int  547 547 547 547 547 547 547 736 736 736 ...
 #>  $ IPI     : int  255 29 29 30 30 31 34 255 255 255 ...
 #>  $ SPL     : int  8 37 45 46 40 27 24 3 12 4 ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x63a7fd67f190>
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5dae8522e180>
 ```
 
 Finally, and most importantly, we have the clicks data:
@@ -157,9 +159,10 @@ str(dat$clicks)
 #>  $ khz          : num  98 114 133 103 111 114 103 100 108 103 ...
 #>  $ amp_at_max   : int  30 43 25 44 30 22 26 24 34 37 ...
 #>  $ has_wav      : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x63a7fd67f190> 
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5dae8522e180> 
 #>  - attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
-#>  - attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...
+#>  - attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
+#>  - attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 ```
 
 And that’s pretty much it. Now you have your CPOD/FPOD data in R and can
@@ -192,17 +195,17 @@ dpm <- fp_summarize(nbhf)
 print(dpm)
 #>          pod                time   dpm   bpm
 #>        <int>              <POSc> <int> <int>
-#>     1:  7660 2024-12-07 06:01:00     0     0
-#>     2:  7660 2024-12-07 06:02:00     0     0
-#>     3:  7660 2024-12-07 06:03:00     0     0
-#>     4:  7660 2024-12-07 06:04:00     0     0
-#>     5:  7660 2024-12-07 06:05:00     0     0
+#>     1:  7660 2024-12-07 06:00:00     0    NA
+#>     2:  7660 2024-12-07 06:01:00     0    NA
+#>     3:  7660 2024-12-07 06:02:00     0    NA
+#>     4:  7660 2024-12-07 06:03:00     0    NA
+#>     5:  7660 2024-12-07 06:04:00     0    NA
 #>    ---                                      
-#> 14396:  7660 2024-12-17 05:56:00     0     0
-#> 14397:  7660 2024-12-17 05:57:00     0     0
-#> 14398:  7660 2024-12-17 05:58:00     0     0
-#> 14399:  7660 2024-12-17 05:59:00     0     0
-#> 14400:  7660 2024-12-17 06:00:00     0     0
+#> 14396:  7660 2024-12-17 05:55:00     0    NA
+#> 14397:  7660 2024-12-17 05:56:00     0    NA
+#> 14398:  7660 2024-12-17 05:57:00     0    NA
+#> 14399:  7660 2024-12-17 05:58:00     0    NA
+#> 14400:  7660 2024-12-17 05:59:00     0    NA
 ```
 
 Of course, there were no detections in the first and last 5 minutes of

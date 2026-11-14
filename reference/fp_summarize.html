@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fpod</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Calculates minute-resolution summaries of clicks</h1>
-      <small class="dont-index">Source: <a href="https://github.com/supermoan/fpod/blob/v1.1.0/R/fp_summarize.R" class="external-link"><code>R/fp_summarize.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/supermoan/fpod/blob/main/R/fp_summarize.R" class="external-link"><code>R/fp_summarize.R</code></a></small>
       <div class="d-none name"><code>fp_summarize.Rd</code></div>
     </div>
 
@@ -44,7 +44,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fp_summarize</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fp_summarize</span><span class="op">(</span><span class="va">x</span>, fpod_compat <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -56,6 +56,17 @@
 the list object returned by <code><a href="fp_read.html">fp_read()</a></code>. Each row must minimally have a
 POSIXct column <code>time</code>. The return value of <code><a href="fp_read.html">fp_read()</a></code> is also accepted with a warning,
 provided that the clicks data.table is present .</p></dd>
+
+
+<dt id="arg-fpod-compat">fpod_compat<a class="anchor" aria-label="anchor" href="#arg-fpod-compat"></a></dt>
+<dd><p>logical. If TRUE (the default), on-time follows the CPOD/FPOD
+official app: for CP3 files, every minute from the first click in <code>x</code> onwards
+counts as on, whatever the pod's tilt. Because <code>x</code> is usually filtered,
+this depends on the filter, as it does in the app. If FALSE, only minutes
+where the pod was probably logging (<code>env$pod_on</code> from <code><a href="fp_read.html">fp_read()</a></code>) count
+as on. That excludes minutes where the tilt exceeded the pod's switch
+angle, which the app counts as on once it has seen a click. For FP3
+files, both settings give the same result.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -163,19 +163,20 @@ dat$header
 
 # show battery levels and recorded temperatures for each minute
 dat$env
+#> Index: <pod_on>
 #>        minute angle  degC bat1v bat2v bat_use pod_on
 #>         <int> <int> <int> <num> <num>   <int> <lgcl>
-#>     1:      1    36     6  1.58  1.40       1   TRUE
-#>     2:      2    36     6  1.58  1.38       1   TRUE
-#>     3:      3    28     6  1.58  1.38       1   TRUE
-#>     4:      4    36     6  1.58  1.40       1   TRUE
-#>     5:      5    35     6  1.58  1.40       1   TRUE
+#>     1:      0    36     6  1.58  1.40       1   TRUE
+#>     2:      1    36     6  1.58  1.38       1   TRUE
+#>     3:      2    28     6  1.58  1.38       1   TRUE
+#>     4:      3    36     6  1.58  1.40       1   TRUE
+#>     5:      4    35     6  1.58  1.40       1   TRUE
 #>    ---                                              
-#> 14396:  14396     0     5  1.58  1.34       1   TRUE
-#> 14397:  14397    14     5  1.58  1.34       1   TRUE
-#> 14398:  14398    14     5  1.58  1.32       1   TRUE
-#> 14399:  14399    20     5  1.58  1.34       1   TRUE
-#> 14400:  14400    25     5  1.58  1.34       1   TRUE
+#> 14396:  14395     0     5  1.58  1.34       1   TRUE
+#> 14397:  14396    14     5  1.58  1.34       1   TRUE
+#> 14398:  14397    14     5  1.58  1.32       1   TRUE
+#> 14399:  14398    20     5  1.58  1.34       1   TRUE
+#> 14400:  14399    25     5  1.58  1.34       1   TRUE
 
 # tally up the number of clicks in each species category
 table(dat$clicks$species)

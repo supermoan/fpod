@@ -5,7 +5,7 @@ Calculates minute-resolution summaries of clicks
 ## Usage
 
 ``` r
-fp_summarize(x)
+fp_summarize(x, fpod_compat = TRUE)
 ```
 
 ## Arguments
@@ -20,6 +20,18 @@ fp_summarize(x)
   [`fp_read()`](https://supermoan.github.io/fpod/reference/fp_read.md)
   is also accepted with a warning, provided that the clicks data.table
   is present .
+
+- fpod_compat:
+
+  logical. If TRUE (the default), on-time follows the CPOD/FPOD official
+  app: for CP3 files, every minute from the first click in `x` onwards
+  counts as on, whatever the pod's tilt. Because `x` is usually
+  filtered, this depends on the filter, as it does in the app. If FALSE,
+  only minutes where the pod was probably logging (`env$pod_on` from
+  [`fp_read()`](https://supermoan.github.io/fpod/reference/fp_read.md))
+  count as on. That excludes minutes where the tilt exceeded the pod's
+  switch angle, which the app counts as on once it has seen a click. For
+  FP3 files, both settings give the same result.
 
 ## Value
 

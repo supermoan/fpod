@@ -19,7 +19,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fpod</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
       <h1>Advanced usage</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/supermoan/fpod/blob/v1.1.0/vignettes/advanced-usage.Rmd" class="external-link"><code>vignettes/advanced-usage.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/supermoan/fpod/blob/main/vignettes/advanced-usage.Rmd" class="external-link"><code>vignettes/advanced-usage.Rmd</code></a></small>
       <div class="d-none name"><code>advanced-usage.Rmd</code></div>
     </div>
 
@@ -107,53 +107,68 @@ files into R.</p>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span></code></pre></div>
 <p>Alternatively, we can pre-declare a list of the right length and
 populate it element by element via a conventional for-loop. It is not
 recommended to create an empty vector and add to it iteratively using
@@ -173,53 +188,68 @@ data size.</p>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ :List of 4</span></span>
 <span><span class="co">#&gt;   ..$ header:List of 15</span></span>
 <span><span class="co">#&gt;   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "index")= int(0) </span></span>
+<span><span class="co">#&gt;   .. .. ..- attr(*, "__pod_on")= int(0) </span></span>
 <span><span class="co">#&gt;   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x6393113ef190&gt; </span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;pointer: 0x59bbe96d8190&gt; </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 1 2 3 4 5 6 7 8 9 10 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span></code></pre></div>
 <p>Personally, I prefer the <code>lapply</code> approach because I think
 it is cleaner, less verbose and possibly more computationally efficient.
 But both approaches demonstrated here are perfectly valid, as is evident
@@ -298,17 +328,17 @@ Here’s one way we could do that, again using <code>lapply</code>:</p>
 <span><span class="va">dpm</span></span>
 <span><span class="co">#&gt;          pod                time   dpm   bpm dpm_dol dpm_sonar</span></span>
 <span><span class="co">#&gt;        &lt;int&gt;              &lt;POSc&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;     &lt;int&gt;</span></span>
-<span><span class="co">#&gt;     1:  7660 2024-12-07 06:01:00     0     0       0         0</span></span>
-<span><span class="co">#&gt;     2:  7660 2024-12-07 06:02:00     0     0       0         0</span></span>
-<span><span class="co">#&gt;     3:  7660 2024-12-07 06:03:00     0     0       0         0</span></span>
-<span><span class="co">#&gt;     4:  7660 2024-12-07 06:04:00     0     0       0         0</span></span>
-<span><span class="co">#&gt;     5:  7660 2024-12-07 06:05:00     0     0       0         0</span></span>
+<span><span class="co">#&gt;     1:  7660 2024-12-07 06:00:00     0     0       0         0</span></span>
+<span><span class="co">#&gt;     2:  7660 2024-12-07 06:01:00     0     0       0         0</span></span>
+<span><span class="co">#&gt;     3:  7660 2024-12-07 06:02:00     0     0       0         0</span></span>
+<span><span class="co">#&gt;     4:  7660 2024-12-07 06:03:00     0     0       0         0</span></span>
+<span><span class="co">#&gt;     5:  7660 2024-12-07 06:04:00     0     0       0         0</span></span>
 <span><span class="co">#&gt;    ---                                                        </span></span>
-<span><span class="co">#&gt; 71996:  7660 2024-12-17 05:56:00     0     0       0         0</span></span>
-<span><span class="co">#&gt; 71997:  7660 2024-12-17 05:57:00     0     0       0         0</span></span>
-<span><span class="co">#&gt; 71998:  7660 2024-12-17 05:58:00     0     0       0         0</span></span>
-<span><span class="co">#&gt; 71999:  7660 2024-12-17 05:59:00     0     0       0         0</span></span>
-<span><span class="co">#&gt; 72000:  7660 2024-12-17 06:00:00     0     0       0         0</span></span></code></pre></div>
+<span><span class="co">#&gt; 71996:  7660 2024-12-17 05:55:00     0     0       0         0</span></span>
+<span><span class="co">#&gt; 71997:  7660 2024-12-17 05:56:00     0     0       0         0</span></span>
+<span><span class="co">#&gt; 71998:  7660 2024-12-17 05:57:00     0     0       0         0</span></span>
+<span><span class="co">#&gt; 71999:  7660 2024-12-17 05:58:00     0     0       0         0</span></span>
+<span><span class="co">#&gt; 72000:  7660 2024-12-17 05:59:00     0     0       0         0</span></span></code></pre></div>
 <p>Now we have our FPOD data in a format that is suited for
 plotting/analyses!</p>
 </div>
