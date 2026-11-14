@@ -110,16 +110,13 @@ fp_find_buzzes <- function(x, method = "clicks", ...) {
 
     params <- list(...)
 
-    if (nrow(x)==0) {
-        return()
-    }
     if (!"time" %in% colnames(x) || !inherits(x$time, "POSIXct")) {
         stop("x must be a data.table/data.frame with click timestamps in a POSIXct column `time`")
     }
 
     # we need at least two clicks to do anything
     if (length(x$time) <= 1) {
-        stop("length(x$time) is <=1, nothing to do!")
+        return(NULL)
     }
 
     # ICIs in units of milliseconds
