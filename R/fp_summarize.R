@@ -1,9 +1,18 @@
 #' Calculates minute-resolution summaries of clicks
 #'
 #' @param x data.table where each row is a click, as the "clicks" element in
-#' the list object returned by [fp_read()]. Each row must minimally have a
-#' POSIXct column `time`. The return value of [fp_read()] is also accepted with a warning,
-#' provided that the clicks data.table is present .
+#'   the list object returned by [fp_read()]. Each row must minimally have a
+#'   POSIXct column `time`. The return value of [fp_read()] is also accepted with a warning,
+#'   provided that the clicks data.table is present .
+#'
+#' @param fpod_compat logical. If TRUE (the default), on-time follows the CPOD/FPOD
+#'   official app: for CP3 files, every minute from the first click in `x` onwards
+#'   counts as on, whatever the pod's tilt. Because `x` is usually filtered,
+#'   this depends on the filter, as it does in the app. If FALSE, only minutes
+#'   where the pod was probably logging (`env$pod_on` from [fp_read()]) count
+#'   as on. That excludes minutes where the tilt exceeded the pod's switch
+#'   angle, which the app counts as on once it has seen a click. For FP3
+#'   files, both settings give the same result.
 #'
 #' @return A data.table with three or four columns:
 #' * time: POSIXct timestamp of the start of the 1-minute time chunk, in YYYY-mm-dd HH:MM format
@@ -42,7 +51,7 @@
 #'
 #' @import data.table
 #' @export
-fp_summarize <- function(x) {
+fp_summarize <- function(x, fpod_compat = TRUE) {
 
     if (inherits(x, "list") && "clicks" %in% names(x) && "time" %in% colnames(x$clicks)) {
         warning("x is a list; expected data.table, but a clicks data.table was
@@ -63,14 +72,23 @@ fp_summarize <- function(x) {
         warning("not all pod values are identical; only the first one will be used")
     }
 
-    if (!("buzz" %in% colnames(x) && inherits(x$buzz, "integer"))) {
+    has_buzz <- "buzz" %in% colnames(x) && inherits(x$buzz, "integer")
+    if (!has_buzz) {
         x$buzz <- NA_integer_
     }
+    on_minutes <- attr(x, "on") # fallback if minutes attribute has been lost
 
+    if (isTRUE(fpod_compat) && nrow(x) > 0L && !is.null(attr(x, "minutes"))) {
+        # FPOD app compatibility: once the app has read a click, it no longer
+        # checks the pod's tilt, so every later minute counts as on.
+        all_minutes <- attr(x, "minutes")
+        on_minutes <- sort(union(on_minutes,
+                                 all_minutes[all_minutes >= min(x$minute)]))
+    }
     dat_full <- data.table(pod = x$pod[1],
-                           time = attr(x,"start") + attr(x,"on")*60,
+                           time = attr(x, "start") + on_minutes*60,
                            dpm = 0L, # detection positive minutes
-                           bpm = 0L) # buzz positive minutes
+                           bpm = if (has_buzz) 0L else NA_integer_) # buzz positive minutes
 
     if (nrow(x) > 0L) {
         dat <- x[, list(dpm = as.integer(.N>0L), # detection positive mins

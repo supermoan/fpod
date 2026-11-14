@@ -124,24 +124,12 @@ fp_read <- function(file, tz = "", simplify = TRUE, amp = "extended") {
 
     if ("env" %in% names(ret)) {
         data.table::setDT(ret$env)
-        if ("clicks" %in% names(ret) && "minute" %in% colnames(ret$env)) {
-            setattr(ret$clicks, "on", ret$env$minute)
+
+        if ("clicks" %in% names(ret) && all(c("minute", "pod_on") %in% colnames(ret$env))) {
+            setattr(ret$clicks, "on", ret$env[pod_on == TRUE, minute])
+            # all minutes in the file, needed by fp_summarize(fpod_compat = TRUE)
+            setattr(ret$clicks, "minutes", ret$env$minute)
         }
-
-        ret$env$pod_on <- as.logical(NA)
-
-        if (all(c("prior_min", "next_min") %in% colnames(ret$env)) && nrow(ret$env) >= 2) {
-            if (type == "FP3" && nrow(ret$env) >= 2) {
-                # note: the order of these two operations is important
-                ret$env$pod_on[2:nrow(ret$env)] <- ret$env$next_min[-nrow(ret$env)]
-                ret$env$pod_on[seq(1,nrow(ret$env)-1)] <- ret$env$prior_min[-1]
-            } else if (type == "CP3") {
-                ret$env$pod_on[seq(1,nrow(ret$env)-1)] <- ret$env$prior_min[-1]
-            }
-            ret$env[, c("prior_min", "next_min") := NULL]
-        }
-
-        ret$env[ret$clicks, on = "minute", pod_on := TRUE]
 
         if ("bat1v" %in% colnames(ret$env)) {
             ret$env[, bat1v := bat1v/50]

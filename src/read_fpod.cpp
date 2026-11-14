@@ -12,12 +12,6 @@
 #include <algorithm> // for std::transform
 #include <tuple> // to be able to cleanly return multiple values from functions
 
-bool eof(std::vector<uint8_t>& buf) {
-    static const uint8_t eof_code = 255;
-    size_t eof_count = std::count(buf.begin(), buf.end(), eof_code);
-    return eof_count >= buf.size() -5;
-}
-
 template<class T>
 T constructInt(const std::vector<uint8_t>& buf, const size_t offset, const size_t size) {
     T res = 0;
@@ -179,13 +173,24 @@ public:
     std::vector<int> bat1;
     std::vector<int> bat2;
     std::vector<int> bat_use;
+    // Status flags from each minute record (FP3: byte 10).
+    // Each minute record sits on the boundary between two minutes:
+    //   prior_min (bit 0): the minute that just ended was ON
+    //   next_min  (bit 2): the minute that is starting is ON
+    // Element i belongs to the i-th minute record, so minute i (the
+    // interval after record i) is described by next_min[i] and prior_min[i+1].
     std::vector<bool> prior_min;
     std::vector<bool> next_min;
+    // number of clicks between minute record i and minute record i+1
+    std::vector<int> n_clicks;
 
     Rcpp::List& header;
     int pic_code{0};
     int fgpa_code{0};
     int last_click{0};
+    // C-POD files have no record after the last minute to say whether that
+    // minute was on; the FPOD app reports it as on.
+    bool last_minute_on{false};
 
     FPODData(std::uintmax_t max_clicks, Rcpp::List& m_header) :
         min(max_clicks),
@@ -244,10 +249,29 @@ public:
             Named("has_wav") = has_wav[filter]
         );
 
+        // Minute-on state, following the FPOD app (MinsOn in DPM exports):
+        // minute i is ON if the record at its start flags the next minute as
+        // ON, or the record at its end flags the prior minute as ON, or any
+        // clicks were logged during it. The last minute has no closing
+        // record, so only next_min and clicks are available for it.
+        const size_t n_min = temp_deg_c.size();
+        std::vector<bool> pod_on(n_min);
+        for (size_t i = 0; i < n_min; i++) {
+            const bool closing_flag = (i + 1 < n_min) ? prior_min[i + 1] : last_minute_on;
+            pod_on[i] = next_min[i] || closing_flag || n_clicks[i] > 0;
+        }
+
+        // Minutes are 0-based, matching clicks$minute: clicks that follow
+        // the i-th minute record get minute == i.
+        IntegerVector env_minute(n_min);
+        for (size_t i = 0; i < n_min; i++) {
+            env_minute[i] = static_cast<int>(i);
+        }
         //if (temp_deg_c.size() > 0) {
 
             DataFrame env = DataFrame::create(
-                Named("minute") = seq(1, temp_deg_c.size()),
+                //Named("minute") = seq(1, temp_deg_c.size()),
+                Named("minute") = env_minute,
                 Named("angle") = wrap(angle_x),
                 //Named("angle_x") = wrap(angle_x),
                 //Named("angle_y") = wrap(angle_y),
@@ -256,8 +280,9 @@ public:
                 Named("bat1v") = wrap(bat1),
                 Named("bat2v") = wrap(bat2),
                 Named("bat_use") = wrap(bat_use),
-                Named("prior_min") = wrap(prior_min),
-                Named("next_min") = wrap(next_min)
+                //Named("prior_min") = wrap(prior_min),
+                //Named("next_min") = wrap(next_min),
+                Named("pod_on") = wrap(pod_on)
             );
 
             ret.push_back(env, "env");
@@ -312,8 +337,16 @@ Rcpp::List getCPODHeader(std::vector<uint8_t>& buf, std::string_view ext) {
     header["location_text"] = parseString(buf, 33, 31);
     header["notes_text"] = parseString(buf, 211, 50);
 
+    // Switch angle limits from the C-POD's operational settings, as raw
+    // tilt sensor values (0-255). Minutes whose tilt falls outside
+    // [from, to] count as OFF in the FPOD app. These are encoded in bytes 64-65
+    // and are at the same place in CP1 and CP3 headers.
+    header["switch_angle_from"] = static_cast<int>(buf[64]);
+    header["switch_angle_to"] = static_cast<int>(buf[65]);
+
     if (ext == "CP3") {
         header["clicks_in_cp1"] = constructInt<uint32_t>(buf, 128, 4);
+
     }
     return header;
 }
@@ -368,6 +401,10 @@ int getFPODData(std::ifstream& fid,
                 dat.amp_at_max[current_click] = std::max(static_cast<uint8_t>(2), buf[10]);
                 dat.amp_reversals[current_click] = buf[13] & 15;
                 dat.duration[current_click] = ((buf[13] & 240) * 16 + buf[14])/5;
+
+                if (current_min >= 0) {
+                    dat.n_clicks[current_min]++;
+                }
 
             } else if (buf[0] == 249) {
 
@@ -426,6 +463,7 @@ int getFPODData(std::ifstream& fid,
                 //dat.bat_use.push_back(1+((buf[10] & 2) == 0));
                 dat.prior_min.push_back(buf[10] & 1);
                 dat.next_min.push_back((buf[10] >> 2) & 1);
+                dat.n_clicks.push_back(0);
 
             }
         }
@@ -447,8 +485,21 @@ int getCPODData(std::ifstream& fid,
     // starting at -1 makes the logic inside the loop below a lot nicer
     int current_click = -1;
     int current_min = -1;
-    int file_ends = 0;
     size_t last_byte = data_buf_size -1;
+
+    // switch angle limits from the header (CP1 and CP3)
+    const int tilt_from = as<int>(dat.header["switch_angle_from"]);
+    const int tilt_to = as<int>(dat.header["switch_angle_to"]);
+
+    // The FPOD app stops parsing minute records once the minute count passes
+    // last_logged_min - first_logged_min, so the tilt in a final minute
+    // record beyond that span is never checked, and the minute before it
+    // counts as on.
+    const int logged_span = as<int>(dat.header["last_logged_min"]) -
+        as<int>(dat.header["first_logged_min"]);
+
+    // count field (bytes 7-8) of the previous CP3 minute record; see below
+    int prev_count = 0;
 
     while (1) {
 
@@ -461,18 +512,21 @@ int getCPODData(std::ifstream& fid,
                 break;
             }
 
-            // In CP3 files, the end of data is indicated by two consecutive
-            // data chunks where all values are 255.
-            if (eof(buf)) {
-                if (++file_ends == 2) {
-                    break;
-                }
-                //continue;
-            } else {
-                file_ends = 0;
-            }
+            // The last byte of each record is its record type, as in the
+            // FPOD app's C-POD reader:
+            //   255       end of data
+            //   254       minute record
+            //   251..253  other record types; not clicks, skipped
+            //   0..250    click (the app warns about 128..250, but still
+            //             reads them as clicks)
 
-            if (buf[last_byte] != 254) {
+            const uint8_t rec_type = buf[last_byte];
+
+            if (rec_type == 255) {
+                break;
+            } else if (rec_type >= 251 && rec_type <= 253) {
+                continue;
+            } else if (rec_type != 254) {
 
                 // click data
                 current_click++;
@@ -488,13 +542,17 @@ int getCPODData(std::ifstream& fid,
                     dat.duration[current_click] = static_cast<double>(buf[3]) / static_cast<double>(buf[5]);
                 }
 
+                if (current_min >= 0) {
+                    dat.n_clicks[current_min]++;
+                }
+
                 if (ext == "CP3") {
                     dat.train_id[current_click] = buf[39];
                     dat.species[current_click] = getSpeciesFromCode(buf[36] >> 3, ext);
                     dat.quality_level[current_click] = buf[36] & 3;
                 }
 
-            } else if (buf[last_byte] == 254) {
+            } else {
                 // minute data
                 current_min++;
                 dat.angle_x.push_back(buf[4]);
@@ -502,15 +560,29 @@ int getCPODData(std::ifstream& fid,
                 dat.bat1.push_back(buf[3]);
                 dat.bat2.push_back(buf[4]);
 
-                // hard-coded defaults for now
-                dat.prior_min.push_back(1);
-                dat.next_min.push_back(0); // not used for cpod
+                // C-POD minute records carry no on/off bits. The FPOD app
+                // treats the minute that just ended as ON when either
+                //  - the raw tilt sensor value (byte 4) of this record is
+                //    within the pod's switch angle limits (inclusive), i.e.
+                //    the pod was not lying on its side, or
+                //  - (CP3 only) the count field (bytes 7-8, big-endian) of
+                //    the previous minute record, i.e. the record that opened
+                //    the minute, is above zero. The app reads that field
+                //    after the tilt check, so it sees the previous record's
+                //    value. CP1 minute records have no such field.
+                const bool beyond_span = current_min >= logged_span;
+                const bool tilt_ok = buf[4] >= tilt_from && buf[4] <= tilt_to;
+                dat.prior_min.push_back(beyond_span || tilt_ok || prev_count > 0);
+                prev_count = (ext == "CP3") ? ((buf[7] << 8) | buf[8]) : 0;
+                dat.next_min.push_back(0);
+                dat.n_clicks.push_back(0);
                 dat.bat_use.push_back(1); // not used for cpod
             }
         }
     }
-    dat.last_click = current_click-1;
-    return current_click-1;
+    dat.last_click = current_click;
+    dat.last_minute_on = true;
+    return current_click;
 }
 
 // [[Rcpp::export]]

@@ -4,13 +4,22 @@
 \alias{fp_summarize}
 \title{Calculates minute-resolution summaries of clicks}
 \usage{
-fp_summarize(x)
+fp_summarize(x, fpod_compat = TRUE)
 }
 \arguments{
 \item{x}{data.table where each row is a click, as the "clicks" element in
 the list object returned by \code{\link[=fp_read]{fp_read()}}. Each row must minimally have a
 POSIXct column \code{time}. The return value of \code{\link[=fp_read]{fp_read()}} is also accepted with a warning,
 provided that the clicks data.table is present .}
+
+\item{fpod_compat}{logical. If TRUE (the default), on-time follows the CPOD/FPOD
+official app: for CP3 files, every minute from the first click in \code{x} onwards
+counts as on, whatever the pod's tilt. Because \code{x} is usually filtered,
+this depends on the filter, as it does in the app. If FALSE, only minutes
+where the pod was probably logging (\code{env$pod_on} from \code{\link[=fp_read]{fp_read()}}) count
+as on. That excludes minutes where the tilt exceeded the pod's switch
+angle, which the app counts as on once it has seen a click. For FP3
+files, both settings give the same result.}
 }
 \value{
 A data.table with three or four columns:
