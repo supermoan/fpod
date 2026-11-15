@@ -38,6 +38,8 @@
 * fp_read() adds a `time` column to `env`.
 * fp_read() adds `header$switch_angle_from` and `header$switch_angle_to` for
   CP1/CP3 files: the pod's switch angle limits, as raw tilt values.
+* fp_read() now gives an error for unknown time zone names, instead of silently 
+  using UTC”
 * fp_summarize() gains an `fpod_compat` argument (default `TRUE`). With
   `fpod_compat = TRUE`, every minute from the first click in `x` onwards
   counts as on, as in the FPOD app, which stops checking a C-POD's tilt once

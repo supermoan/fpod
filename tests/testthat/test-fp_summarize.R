@@ -48,3 +48,29 @@ test_that("fp_summarize works", {
     expect_error(fp_summarize(dat$clicks), "x has malformed attributes")
 
 })
+
+test_that("fp_summarize aligns minutes with clicks and handles bpm", {
+    dat <- fp_read(fp_example("gullars_period1.FP3"))
+    nbhf <- dat$clicks[species == "NBHF" & quality_level >= 2]
+    s <- fp_summarize(nbhf, fpod_compat = FALSE)
+
+    expect_equal(nrow(s), sum(dat$env$pod_on))
+    click_minutes <- unique(as.POSIXct(trunc(nbhf$time, units = "mins")))
+    expect_true(all(click_minutes %in% s$time))
+    expect_equal(sum(s$dpm), length(click_minutes))
+    expect_true(all(is.na(s$bpm)))   # no buzz column
+})
+
+test_that("fpod_compat makes no difference for a continuously logging F-POD", {
+    dat <- fp_read(fp_example("gullars_period1.FP3"))
+    nbhf <- dat$clicks[species == "NBHF" & quality_level >= 2]
+    expect_equal(fp_summarize(nbhf, fpod_compat = TRUE),
+                 fp_summarize(nbhf, fpod_compat = FALSE))
+})
+
+test_that("files with no clicks still give a POSIXct time column", {
+    dat <- fp_read(fp_example("gullars_period1.FP3"), tz = "Europe/Oslo")
+    empty <- dat$clicks[0]
+    expect_s3_class(empty$time, "POSIXct")
+    expect_equal(attr(empty$time, "tzone"), "Europe/Oslo")
+})

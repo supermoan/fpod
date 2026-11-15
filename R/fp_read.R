@@ -102,6 +102,14 @@ fp_read <- function(file, tz = "UTC", simplify = TRUE, amp = "extended",
         stop("File does not exist!")
     }
 
+    if (!is.character(tz) || length(tz) != 1L || is.na(tz)) {
+        stop("invalid 'tz' value")
+    }
+
+    if (!tz %in% c("", OlsonNames())) {
+        stop("invalid 'tz' value: unknown time zone \"", tz, "\"")
+    }
+
     if (!is.numeric(time_offset) && !inherits(time_offset, "difftime") ||
         length(time_offset) != 1L) {
         stop("time_offset must be a single number (seconds) or a difftime")
