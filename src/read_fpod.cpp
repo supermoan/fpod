@@ -166,7 +166,7 @@ public:
     std::vector<WavData> wav_data;
 
     // environmental data
-    std::vector<int> temp_deg_c;
+    std::vector<double> temp_deg_c;
     std::vector<int> angle_x;
     //std::vector<int> angle_y;
     //std::vector<int> angle_z;
@@ -556,9 +556,9 @@ int getCPODData(std::ifstream& fid,
                 // minute data
                 current_min++;
                 dat.angle_x.push_back(buf[4]);
-                dat.temp_deg_c.push_back((buf[3]+2) / 5); // +2 to round to nearest int
-                dat.bat1.push_back(buf[3]);
-                dat.bat2.push_back(buf[4]);
+                dat.temp_deg_c.push_back(buf[3] / 5.0); // +2 to round to nearest int
+                dat.bat1.push_back(NA_INTEGER);
+                dat.bat2.push_back(NA_INTEGER);
 
                 // C-POD minute records carry no on/off bits. The FPOD app
                 // treats the minute that just ended as ON when either
@@ -576,7 +576,7 @@ int getCPODData(std::ifstream& fid,
                 prev_count = (ext == "CP3") ? ((buf[7] << 8) | buf[8]) : 0;
                 dat.next_min.push_back(0);
                 dat.n_clicks.push_back(0);
-                dat.bat_use.push_back(1); // not used for cpod
+                dat.bat_use.push_back(NA_INTEGER); // not recorded by C-PODs
             }
         }
     }

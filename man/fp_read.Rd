@@ -4,13 +4,14 @@
 \alias{fp_read}
 \title{Read FPOD data}
 \usage{
-fp_read(file, tz = "", simplify = TRUE, amp = "extended")
+fp_read(file, tz = "UTC", simplify = TRUE, amp = "extended", time_offset = 0)
 }
 \arguments{
 \item{file}{a character string. The path to the FPOD (or CPOD) data file.}
 
-\item{tz}{a character string. The time zone specification to be used for
-calculating dates. Passed unchanged to \code{\link[=as.POSIXct]{as.POSIXct()}}.}
+\item{tz}{a character string. The time zone used to display times, e.g.
+"Europe/Oslo". Times are always calculated in UTC; \code{tz} only affects how
+they are displayed. Default "UTC".}
 
 \item{simplify}{logical. If TRUE, simplifies the clicks data.table by
 stripping away some columns, such as \code{clk_ipi_range}, \code{ipi_pre_max},
@@ -20,6 +21,14 @@ stripping away some columns, such as \code{clk_ipi_range}, \code{ipi_pre_max},
 extrapolated from the duration of clipping and the IPI. For any other
 values of amp, the compressed SPL values recorded by the FPOD are used
 directly.}
+
+\item{time_offset}{numeric (seconds) or \link{difftime}. Added to all times in
+the file; negative values are subtracted. Use it to convert the POD clock
+to UTC and to correct a clock known to be wrong. For example, a clock set
+to Central European summer time (UTC+2) is 2 hours ahead of UTC, so use
+\code{as.difftime(-2, units = "hours")}; a clock that was 2 days slow needs
+\code{as.difftime(2, units = "days")}. Default 0 (the POD clock is assumed to
+run on UTC).}
 }
 \value{
 A list, with one or more of the following data.frames (or
@@ -65,6 +74,18 @@ another click that has already been classified.
 \item duration: click duration
 \item has_wav: TRUE if there is a pseudo-WAV recorded for this click.
 }
+
+POD times are stored as minutes since 1899-12-30 (the Delphi/Excel
+convention), as read from the POD clock. \code{time_offset} is added to convert
+them to UTC, and they are then displayed in \code{tz}. The corrected first and
+last logged times are also returned as \code{header$first_logged_time} and
+\code{header$last_logged_time}.
+
+A POD clock keeps the time it was set to, with no daylight saving changes,
+so a clock set to summer time stays on summer time through the winter. If a
+clock is known to have been wrong for a whole file, include the error in
+\code{time_offset} too, e.g. 2 days for a clock that was 2 days slow. See
+examples.
 }
 \examples{
 # read a FP3 file
@@ -73,6 +94,12 @@ dat <- fp_read(fn)
 
 # show misc. information (pod number, deployment date, etc.)
 dat$header
+
+# a POD clock set to Norwegian summer time (UTC+2) and known to be 2 days
+# slow, with times displayed in Norwegian local time
+dat <- fp_read(fn, tz = "Europe/Oslo",
+               time_offset = as.difftime(2, units = "days") -   # clock 2 days slow
+                             as.difftime(2, units = "hours"))   # clock on UTC+2
 
 # show battery levels and recorded temperatures for each minute
 dat$env
