@@ -67,22 +67,24 @@ Let’s inspect each of these elements in turn.
 ``` r
 
 str(dat$header)
-#> List of 15
-#>  $ pod_id          : int 7660
-#>  $ first_logged_min: int 65709000
-#>  $ last_logged_min : int 65723400
-#>  $ water_depth     : int 30
-#>  $ deployment_depth: int 0
-#>  $ lat_text        : chr "70,03332"
-#>  $ lon_text        : chr "18,9162"
-#>  $ location_text   : chr ""
-#>  $ notes_text      : chr ""
-#>  $ gmt_text        : chr ""
-#>  $ pic_ver         : raw 23
-#>  $ fpga_ver        : int 1034
-#>  $ extended_amps   : logi TRUE
-#>  $ clicks_in_fp1   : num 48680158
-#>  $ filename        : chr "/home/runner/work/_temp/Library/fpod/extdata/gullars_period1.FP3"
+#> List of 17
+#>  $ pod_id           : int 7660
+#>  $ first_logged_min : int 65709000
+#>  $ last_logged_min  : int 65723400
+#>  $ water_depth      : int 30
+#>  $ deployment_depth : int 0
+#>  $ lat_text         : chr "70,03332"
+#>  $ lon_text         : chr "18,9162"
+#>  $ location_text    : chr ""
+#>  $ notes_text       : chr ""
+#>  $ gmt_text         : chr ""
+#>  $ pic_ver          : raw 23
+#>  $ fpga_ver         : int 1034
+#>  $ extended_amps    : logi TRUE
+#>  $ clicks_in_fp1    : num 48680158
+#>  $ filename         : chr "/home/runner/work/_temp/Library/fpod/extdata/gullars_period1.FP3"
+#>  $ first_logged_time: POSIXct[1:1], format: "2024-12-05 06:00:00"
+#>  $ last_logged_time : POSIXct[1:1], format: "2024-12-15 06:00:00"
 ```
 
 We can see that this gives us a mix of technical and deployment specific
@@ -111,17 +113,16 @@ started, i.e. `first_logged_min`.
 ``` r
 
 str(dat$env)
-#> Classes 'data.table' and 'data.frame':   14400 obs. of  7 variables:
+#> Classes 'data.table' and 'data.frame':   14400 obs. of  8 variables:
+#>  $ time   : POSIXct, format: "2024-12-05 06:00:00" "2024-12-05 06:01:00" ...
 #>  $ minute : int  0 1 2 3 4 5 6 7 8 9 ...
 #>  $ angle  : int  36 36 28 36 35 26 32 32 34 32 ...
-#>  $ degC   : int  6 6 6 6 6 6 6 6 6 6 ...
-#>  $ bat1v  : num  1.58 1.58 1.58 1.58 1.58 1.58 1.58 1.58 1.6 1.58 ...
-#>  $ bat2v  : num  1.4 1.38 1.38 1.4 1.4 1.4 1.38 1.38 1.38 1.38 ...
+#>  $ degC   : num  6 6 6 6 6 6 6 6 6 6 ...
+#>  $ bat1v  : num  7.9 7.9 7.9 7.9 7.9 7.9 7.9 7.9 8 7.9 ...
+#>  $ bat2v  : num  7 6.9 6.9 7 7 7 6.9 6.9 6.9 6.9 ...
 #>  $ bat_use: int  1 1 1 1 1 1 1 1 1 1 ...
 #>  $ pod_on : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x5e92c57b8190> 
-#>  - attr(*, "index")= int(0) 
-#>   ..- attr(*, "__pod_on")= int(0)
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5dd169a0e190>
 ```
 
 Now let’s turn our attention to the next element: The wav data.table
@@ -136,7 +137,7 @@ str(dat$wav)
 #>  $ click_no: int  547 547 547 547 547 547 547 736 736 736 ...
 #>  $ IPI     : int  255 29 29 30 30 31 34 255 255 255 ...
 #>  $ SPL     : int  8 37 45 46 40 27 24 3 12 4 ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x5e92c57b8190>
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5dd169a0e190>
 ```
 
 Finally, and most importantly, we have the clicks data:
@@ -146,7 +147,7 @@ Finally, and most importantly, we have the clicks data:
 str(dat$clicks)
 #> Classes 'data.table' and 'data.frame':   82637 obs. of  14 variables:
 #>  $ pod          : int  7660 7660 7660 7660 7660 7660 7660 7660 7660 7660 ...
-#>  $ time         : POSIXct, format: "2024-12-07 12:42:11" "2024-12-07 12:42:11" ...
+#>  $ time         : POSIXct, format: "2024-12-05 12:42:11" "2024-12-05 12:42:11" ...
 #>  $ minute       : int  402 402 402 402 402 402 402 402 402 402 ...
 #>  $ microsec     : int  11382235 11467200 11552250 11637180 11722190 11892225 11977090 12062095 12147010 12231990 ...
 #>  $ click_no     : int  1 2 3 4 5 6 7 8 9 10 ...
@@ -159,8 +160,8 @@ str(dat$clicks)
 #>  $ khz          : num  98 114 133 103 111 114 103 100 108 103 ...
 #>  $ amp_at_max   : int  30 43 25 44 30 22 26 24 34 37 ...
 #>  $ has_wav      : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
-#>  - attr(*, ".internal.selfref")=<pointer: 0x5e92c57b8190> 
-#>  - attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>  - attr(*, ".internal.selfref")=<pointer: 0x5dd169a0e190> 
+#>  - attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>  - attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  - attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 ```
@@ -195,17 +196,17 @@ dpm <- fp_summarize(nbhf)
 print(dpm)
 #>          pod                time   dpm   bpm
 #>        <int>              <POSc> <int> <int>
-#>     1:  7660 2024-12-07 06:00:00     0    NA
-#>     2:  7660 2024-12-07 06:01:00     0    NA
-#>     3:  7660 2024-12-07 06:02:00     0    NA
-#>     4:  7660 2024-12-07 06:03:00     0    NA
-#>     5:  7660 2024-12-07 06:04:00     0    NA
+#>     1:  7660 2024-12-05 06:00:00     0    NA
+#>     2:  7660 2024-12-05 06:01:00     0    NA
+#>     3:  7660 2024-12-05 06:02:00     0    NA
+#>     4:  7660 2024-12-05 06:03:00     0    NA
+#>     5:  7660 2024-12-05 06:04:00     0    NA
 #>    ---                                      
-#> 14396:  7660 2024-12-17 05:55:00     0    NA
-#> 14397:  7660 2024-12-17 05:56:00     0    NA
-#> 14398:  7660 2024-12-17 05:57:00     0    NA
-#> 14399:  7660 2024-12-17 05:58:00     0    NA
-#> 14400:  7660 2024-12-17 05:59:00     0    NA
+#> 14396:  7660 2024-12-15 05:55:00     0    NA
+#> 14397:  7660 2024-12-15 05:56:00     0    NA
+#> 14398:  7660 2024-12-15 05:57:00     0    NA
+#> 14399:  7660 2024-12-15 05:58:00     0    NA
+#> 14400:  7660 2024-12-15 05:59:00     0    NA
 ```
 
 Of course, there were no detections in the first and last 5 minutes of

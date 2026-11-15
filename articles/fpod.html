@@ -127,22 +127,24 @@ specific file being read).</p>
 <p>Let’s inspect each of these elements in turn.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">header</span><span class="op">)</span></span>
-<span><span class="co">#&gt; List of 15</span></span>
-<span><span class="co">#&gt;  $ pod_id          : int 7660</span></span>
-<span><span class="co">#&gt;  $ first_logged_min: int 65709000</span></span>
-<span><span class="co">#&gt;  $ last_logged_min : int 65723400</span></span>
-<span><span class="co">#&gt;  $ water_depth     : int 30</span></span>
-<span><span class="co">#&gt;  $ deployment_depth: int 0</span></span>
-<span><span class="co">#&gt;  $ lat_text        : chr "70,03332"</span></span>
-<span><span class="co">#&gt;  $ lon_text        : chr "18,9162"</span></span>
-<span><span class="co">#&gt;  $ location_text   : chr ""</span></span>
-<span><span class="co">#&gt;  $ notes_text      : chr ""</span></span>
-<span><span class="co">#&gt;  $ gmt_text        : chr ""</span></span>
-<span><span class="co">#&gt;  $ pic_ver         : raw 23</span></span>
-<span><span class="co">#&gt;  $ fpga_ver        : int 1034</span></span>
-<span><span class="co">#&gt;  $ extended_amps   : logi TRUE</span></span>
-<span><span class="co">#&gt;  $ clicks_in_fp1   : num 48680158</span></span>
-<span><span class="co">#&gt;  $ filename        : chr "/home/runner/work/_temp/Library/fpod/extdata/gullars_period1.FP3"</span></span></code></pre></div>
+<span><span class="co">#&gt; List of 17</span></span>
+<span><span class="co">#&gt;  $ pod_id           : int 7660</span></span>
+<span><span class="co">#&gt;  $ first_logged_min : int 65709000</span></span>
+<span><span class="co">#&gt;  $ last_logged_min  : int 65723400</span></span>
+<span><span class="co">#&gt;  $ water_depth      : int 30</span></span>
+<span><span class="co">#&gt;  $ deployment_depth : int 0</span></span>
+<span><span class="co">#&gt;  $ lat_text         : chr "70,03332"</span></span>
+<span><span class="co">#&gt;  $ lon_text         : chr "18,9162"</span></span>
+<span><span class="co">#&gt;  $ location_text    : chr ""</span></span>
+<span><span class="co">#&gt;  $ notes_text       : chr ""</span></span>
+<span><span class="co">#&gt;  $ gmt_text         : chr ""</span></span>
+<span><span class="co">#&gt;  $ pic_ver          : raw 23</span></span>
+<span><span class="co">#&gt;  $ fpga_ver         : int 1034</span></span>
+<span><span class="co">#&gt;  $ extended_amps    : logi TRUE</span></span>
+<span><span class="co">#&gt;  $ clicks_in_fp1    : num 48680158</span></span>
+<span><span class="co">#&gt;  $ filename         : chr "/home/runner/work/_temp/Library/fpod/extdata/gullars_period1.FP3"</span></span>
+<span><span class="co">#&gt;  $ first_logged_time: POSIXct[1:1], format: "2024-12-05 06:00:00"</span></span>
+<span><span class="co">#&gt;  $ last_logged_time : POSIXct[1:1], format: "2024-12-15 06:00:00"</span></span></code></pre></div>
 <p>We can see that this gives us a mix of technical and deployment
 specific metadata. In fact, there’s a lot more information stored in the
 CPOD/FPOD headers that the fpod package currently doesn’t care about.
@@ -163,17 +165,16 @@ of the two battery columns, per minute. The minutes are relative to when
 the pod was started, i.e. <code>first_logged_min</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">env</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   14400 obs. of  7 variables:</span></span>
+<span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   14400 obs. of  8 variables:</span></span>
+<span><span class="co">#&gt;  $ time   : POSIXct, format: "2024-12-05 06:00:00" "2024-12-05 06:01:00" ...</span></span>
 <span><span class="co">#&gt;  $ minute : int  0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ angle  : int  36 36 28 36 35 26 32 32 34 32 ...</span></span>
-<span><span class="co">#&gt;  $ degC   : int  6 6 6 6 6 6 6 6 6 6 ...</span></span>
-<span><span class="co">#&gt;  $ bat1v  : num  1.58 1.58 1.58 1.58 1.58 1.58 1.58 1.58 1.6 1.58 ...</span></span>
-<span><span class="co">#&gt;  $ bat2v  : num  1.4 1.38 1.38 1.4 1.4 1.4 1.38 1.38 1.38 1.38 ...</span></span>
+<span><span class="co">#&gt;  $ degC   : num  6 6 6 6 6 6 6 6 6 6 ...</span></span>
+<span><span class="co">#&gt;  $ bat1v  : num  7.9 7.9 7.9 7.9 7.9 7.9 7.9 7.9 8 7.9 ...</span></span>
+<span><span class="co">#&gt;  $ bat2v  : num  7 6.9 6.9 7 7 7 6.9 6.9 6.9 6.9 ...</span></span>
 <span><span class="co">#&gt;  $ bat_use: int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ pod_on : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
-<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5e92c57b8190&gt; </span></span>
-<span><span class="co">#&gt;  - attr(*, "index")= int(0) </span></span>
-<span><span class="co">#&gt;   ..- attr(*, "__pod_on")= int(0)</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5dd169a0e190&gt;</span></span></code></pre></div>
 <p>Now let’s turn our attention to the next element: The wav data.table
 holds extra information (inter-peak-intervals, IPI + sound pressure
 level, SPL) for a sample of recorded clicks, usually less than 1%, but
@@ -184,13 +185,13 @@ possibly more or less depending on user configuration.</p>
 <span><span class="co">#&gt;  $ click_no: int  547 547 547 547 547 547 547 736 736 736 ...</span></span>
 <span><span class="co">#&gt;  $ IPI     : int  255 29 29 30 30 31 34 255 255 255 ...</span></span>
 <span><span class="co">#&gt;  $ SPL     : int  8 37 45 46 40 27 24 3 12 4 ...</span></span>
-<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5e92c57b8190&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5dd169a0e190&gt;</span></span></code></pre></div>
 <p>Finally, and most importantly, we have the clicks data:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">clicks</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Classes 'data.table' and 'data.frame':   82637 obs. of  14 variables:</span></span>
 <span><span class="co">#&gt;  $ pod          : int  7660 7660 7660 7660 7660 7660 7660 7660 7660 7660 ...</span></span>
-<span><span class="co">#&gt;  $ time         : POSIXct, format: "2024-12-07 12:42:11" "2024-12-07 12:42:11" ...</span></span>
+<span><span class="co">#&gt;  $ time         : POSIXct, format: "2024-12-05 12:42:11" "2024-12-05 12:42:11" ...</span></span>
 <span><span class="co">#&gt;  $ minute       : int  402 402 402 402 402 402 402 402 402 402 ...</span></span>
 <span><span class="co">#&gt;  $ microsec     : int  11382235 11467200 11552250 11637180 11722190 11892225 11977090 12062095 12147010 12231990 ...</span></span>
 <span><span class="co">#&gt;  $ click_no     : int  1 2 3 4 5 6 7 8 9 10 ...</span></span>
@@ -203,8 +204,8 @@ possibly more or less depending on user configuration.</p>
 <span><span class="co">#&gt;  $ khz          : num  98 114 133 103 111 114 103 100 108 103 ...</span></span>
 <span><span class="co">#&gt;  $ amp_at_max   : int  30 43 25 44 30 22 26 24 34 37 ...</span></span>
 <span><span class="co">#&gt;  $ has_wav      : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5e92c57b8190&gt; </span></span>
-<span><span class="co">#&gt;  - attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"</span></span>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: 0x5dd169a0e190&gt; </span></span>
+<span><span class="co">#&gt;  - attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"</span></span>
 <span><span class="co">#&gt;  - attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...</span></span></code></pre></div>
 <p>And that’s pretty much it. Now you have your CPOD/FPOD data in R and
@@ -234,17 +235,17 @@ porpoise clicks.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dpm</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          pod                time   dpm   bpm</span></span>
 <span><span class="co">#&gt;        &lt;int&gt;              &lt;POSc&gt; &lt;int&gt; &lt;int&gt;</span></span>
-<span><span class="co">#&gt;     1:  7660 2024-12-07 06:00:00     0    NA</span></span>
-<span><span class="co">#&gt;     2:  7660 2024-12-07 06:01:00     0    NA</span></span>
-<span><span class="co">#&gt;     3:  7660 2024-12-07 06:02:00     0    NA</span></span>
-<span><span class="co">#&gt;     4:  7660 2024-12-07 06:03:00     0    NA</span></span>
-<span><span class="co">#&gt;     5:  7660 2024-12-07 06:04:00     0    NA</span></span>
+<span><span class="co">#&gt;     1:  7660 2024-12-05 06:00:00     0    NA</span></span>
+<span><span class="co">#&gt;     2:  7660 2024-12-05 06:01:00     0    NA</span></span>
+<span><span class="co">#&gt;     3:  7660 2024-12-05 06:02:00     0    NA</span></span>
+<span><span class="co">#&gt;     4:  7660 2024-12-05 06:03:00     0    NA</span></span>
+<span><span class="co">#&gt;     5:  7660 2024-12-05 06:04:00     0    NA</span></span>
 <span><span class="co">#&gt;    ---                                      </span></span>
-<span><span class="co">#&gt; 14396:  7660 2024-12-17 05:55:00     0    NA</span></span>
-<span><span class="co">#&gt; 14397:  7660 2024-12-17 05:56:00     0    NA</span></span>
-<span><span class="co">#&gt; 14398:  7660 2024-12-17 05:57:00     0    NA</span></span>
-<span><span class="co">#&gt; 14399:  7660 2024-12-17 05:58:00     0    NA</span></span>
-<span><span class="co">#&gt; 14400:  7660 2024-12-17 05:59:00     0    NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 14396:  7660 2024-12-15 05:55:00     0    NA</span></span>
+<span><span class="co">#&gt; 14397:  7660 2024-12-15 05:56:00     0    NA</span></span>
+<span><span class="co">#&gt; 14398:  7660 2024-12-15 05:57:00     0    NA</span></span>
+<span><span class="co">#&gt; 14399:  7660 2024-12-15 05:58:00     0    NA</span></span>
+<span><span class="co">#&gt; 14400:  7660 2024-12-15 05:59:00     0    NA</span></span></code></pre></div>
 <p>Of course, there were no detections in the first and last 5 minutes
 of the pod’s recording, so all we see are zeros in this preview. But we
 can expect some rows to be nonzero.</p>

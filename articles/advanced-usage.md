@@ -55,68 +55,58 @@ dat <- lapply(fpod_files, fp_read)
 str(dat, 2)
 #> List of 5
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 ```
@@ -141,68 +131,58 @@ for (i in 1:length(fpod_files)) {
 str(dat, 2)
 #> List of 5
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
-#>   ..$ header:List of 15
-#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  7 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "index")= int(0) 
-#>   .. .. ..- attr(*, "__pod_on")= int(0) 
+#>   ..$ header:List of 17
+#>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x596363108190> 
-#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-07 06:00:00"
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 ```
@@ -240,17 +220,17 @@ Let’s have a look:
 nbhf[, 1:7] # show only first 7 cols for brevity
 #>           pod                time minute microsec click_no train_id species
 #>         <int>              <POSc>  <int>    <int>    <int>    <int>  <char>
-#>      1:  7660 2024-12-07 16:06:24    606 24099690      510        3    NBHF
-#>      2:  7660 2024-12-07 16:06:24    606 24192330      511        3    NBHF
-#>      3:  7660 2024-12-07 16:06:24    606 24276885      512        3    NBHF
-#>      4:  7660 2024-12-07 16:06:24    606 24355150      513        3    NBHF
-#>      5:  7660 2024-12-07 16:06:24    606 24425345      514        3    NBHF
+#>      1:  7660 2024-12-05 16:06:24    606 24099690      510        3    NBHF
+#>      2:  7660 2024-12-05 16:06:24    606 24192330      511        3    NBHF
+#>      3:  7660 2024-12-05 16:06:24    606 24276885      512        3    NBHF
+#>      4:  7660 2024-12-05 16:06:24    606 24355150      513        3    NBHF
+#>      5:  7660 2024-12-05 16:06:24    606 24425345      514        3    NBHF
 #>     ---                                                                    
-#> 257946:  7660 2024-12-16 21:58:10  13918 10793125    82624        3    NBHF
-#> 257947:  7660 2024-12-16 21:58:10  13918 10796900    82625        3    NBHF
-#> 257948:  7660 2024-12-16 21:58:10  13918 10800740    82626        3    NBHF
-#> 257949:  7660 2024-12-16 21:58:10  13918 10804635    82627        3    NBHF
-#> 257950:  7660 2024-12-16 21:58:10  13918 10808595    82628        3    NBHF
+#> 257946:  7660 2024-12-14 21:58:10  13918 10793125    82624        3    NBHF
+#> 257947:  7660 2024-12-14 21:58:10  13918 10796900    82625        3    NBHF
+#> 257948:  7660 2024-12-14 21:58:10  13918 10800740    82626        3    NBHF
+#> 257949:  7660 2024-12-14 21:58:10  13918 10804635    82627        3    NBHF
+#> 257950:  7660 2024-12-14 21:58:10  13918 10808595    82628        3    NBHF
 ```
 
 In some cases, you may run into trouble with empty FP3 files (files with
@@ -299,17 +279,17 @@ dpm <- lapply(dat, function(x) {
 dpm
 #>          pod                time   dpm   bpm dpm_dol dpm_sonar
 #>        <int>              <POSc> <int> <int>   <int>     <int>
-#>     1:  7660 2024-12-07 06:00:00     0     0       0         0
-#>     2:  7660 2024-12-07 06:01:00     0     0       0         0
-#>     3:  7660 2024-12-07 06:02:00     0     0       0         0
-#>     4:  7660 2024-12-07 06:03:00     0     0       0         0
-#>     5:  7660 2024-12-07 06:04:00     0     0       0         0
+#>     1:  7660 2024-12-05 06:00:00     0     0       0         0
+#>     2:  7660 2024-12-05 06:01:00     0     0       0         0
+#>     3:  7660 2024-12-05 06:02:00     0     0       0         0
+#>     4:  7660 2024-12-05 06:03:00     0     0       0         0
+#>     5:  7660 2024-12-05 06:04:00     0     0       0         0
 #>    ---                                                        
-#> 71996:  7660 2024-12-17 05:55:00     0     0       0         0
-#> 71997:  7660 2024-12-17 05:56:00     0     0       0         0
-#> 71998:  7660 2024-12-17 05:57:00     0     0       0         0
-#> 71999:  7660 2024-12-17 05:58:00     0     0       0         0
-#> 72000:  7660 2024-12-17 05:59:00     0     0       0         0
+#> 71996:  7660 2024-12-15 05:55:00     0     0       0         0
+#> 71997:  7660 2024-12-15 05:56:00     0     0       0         0
+#> 71998:  7660 2024-12-15 05:57:00     0     0       0         0
+#> 71999:  7660 2024-12-15 05:58:00     0     0       0         0
+#> 72000:  7660 2024-12-15 05:59:00     0     0       0         0
 ```
 
 Now we have our FPOD data in a format that is suited for

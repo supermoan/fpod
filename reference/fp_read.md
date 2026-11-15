@@ -6,7 +6,7 @@ R.
 ## Usage
 
 ``` r
-fp_read(file, tz = "", simplify = TRUE, amp = "extended")
+fp_read(file, tz = "UTC", simplify = TRUE, amp = "extended", time_offset = 0)
 ```
 
 ## Arguments
@@ -17,9 +17,9 @@ fp_read(file, tz = "", simplify = TRUE, amp = "extended")
 
 - tz:
 
-  a character string. The time zone specification to be used for
-  calculating dates. Passed unchanged to
-  [`as.POSIXct()`](https://rdrr.io/r/base/as.POSIXlt.html).
+  a character string. The time zone used to display times, e.g.
+  "Europe/Oslo". Times are always calculated in UTC; `tz` only affects
+  how they are displayed. Default "UTC".
 
 - simplify:
 
@@ -33,6 +33,17 @@ fp_read(file, tz = "", simplify = TRUE, amp = "extended")
   extrapolated from the duration of clipping and the IPI. For any other
   values of amp, the compressed SPL values recorded by the FPOD are used
   directly.
+
+- time_offset:
+
+  numeric (seconds) or [difftime](https://rdrr.io/r/base/difftime.html).
+  Added to all times in the file; negative values are subtracted. Use it
+  to convert the POD clock to UTC and to correct a clock known to be
+  wrong. For example, a clock set to Central European summer time
+  (UTC+2) is 2 hours ahead of UTC, so use
+  `as.difftime(-2, units = "hours")`; a clock that was 2 days slow needs
+  `as.difftime(2, units = "days")`. Default 0 (the POD clock is assumed
+  to run on UTC).
 
 ## Value
 
@@ -101,6 +112,18 @@ The clicks data.frame contains the following columns:
 
 - has_wav: TRUE if there is a pseudo-WAV recorded for this click.
 
+POD times are stored as minutes since 1899-12-30 (the Delphi/Excel
+convention), as read from the POD clock. `time_offset` is added to
+convert them to UTC, and they are then displayed in `tz`. The corrected
+first and last logged times are also returned as
+`header$first_logged_time` and `header$last_logged_time`.
+
+A POD clock keeps the time it was set to, with no daylight saving
+changes, so a clock set to summer time stays on summer time through the
+winter. If a clock is known to have been wrong for a whole file, include
+the error in `time_offset` too, e.g. 2 days for a clock that was 2 days
+slow. See examples.
+
 ## See also
 
 [`fp_find_buzzes()`](https://supermoan.github.io/fpod/reference/fp_find_buzzes.md),
@@ -160,23 +183,34 @@ dat$header
 #> $filename
 #> [1] "/home/runner/work/_temp/Library/fpod/extdata/gullars_period1.FP3"
 #> 
+#> $first_logged_time
+#> [1] "2024-12-05 06:00:00 UTC"
+#> 
+#> $last_logged_time
+#> [1] "2024-12-15 06:00:00 UTC"
+#> 
+
+# a POD clock set to Norwegian summer time (UTC+2) and known to be 2 days
+# slow, with times displayed in Norwegian local time
+dat <- fp_read(fn, tz = "Europe/Oslo",
+               time_offset = as.difftime(2, units = "days") -   # clock 2 days slow
+                             as.difftime(2, units = "hours"))   # clock on UTC+2
 
 # show battery levels and recorded temperatures for each minute
 dat$env
-#> Index: <pod_on>
-#>        minute angle  degC bat1v bat2v bat_use pod_on
-#>         <int> <int> <int> <num> <num>   <int> <lgcl>
-#>     1:      0    36     6  1.58  1.40       1   TRUE
-#>     2:      1    36     6  1.58  1.38       1   TRUE
-#>     3:      2    28     6  1.58  1.38       1   TRUE
-#>     4:      3    36     6  1.58  1.40       1   TRUE
-#>     5:      4    35     6  1.58  1.40       1   TRUE
-#>    ---                                              
-#> 14396:  14395     0     5  1.58  1.34       1   TRUE
-#> 14397:  14396    14     5  1.58  1.34       1   TRUE
-#> 14398:  14397    14     5  1.58  1.32       1   TRUE
-#> 14399:  14398    20     5  1.58  1.34       1   TRUE
-#> 14400:  14399    25     5  1.58  1.34       1   TRUE
+#>                       time minute angle  degC bat1v bat2v bat_use pod_on
+#>                     <POSc>  <int> <int> <num> <num> <num>   <int> <lgcl>
+#>     1: 2024-12-07 05:00:00      0    36     6   7.9   7.0       1   TRUE
+#>     2: 2024-12-07 05:01:00      1    36     6   7.9   6.9       1   TRUE
+#>     3: 2024-12-07 05:02:00      2    28     6   7.9   6.9       1   TRUE
+#>     4: 2024-12-07 05:03:00      3    36     6   7.9   7.0       1   TRUE
+#>     5: 2024-12-07 05:04:00      4    35     6   7.9   7.0       1   TRUE
+#>    ---                                                                  
+#> 14396: 2024-12-17 04:55:00  14395     0     5   7.9   6.7       1   TRUE
+#> 14397: 2024-12-17 04:56:00  14396    14     5   7.9   6.7       1   TRUE
+#> 14398: 2024-12-17 04:57:00  14397    14     5   7.9   6.6       1   TRUE
+#> 14399: 2024-12-17 04:58:00  14398    20     5   7.9   6.7       1   TRUE
+#> 14400: 2024-12-17 04:59:00  14399    25     5   7.9   6.7       1   TRUE
 
 # tally up the number of clicks in each species category
 table(dat$clicks$species)
