@@ -58,6 +58,7 @@
 <ul><li>fp_read() gains a <code>time_offset</code> argument (seconds or difftime), added to all times in a file. Use it to convert the POD clock to UTC (e.g. -2 hours for a clock set to Central European summer time) and to correct known clock errors. A warning is given for plain numbers under one hour, which are likely hours given without units.</li>
 <li>fp_read() adds a <code>time</code> column to <code>env</code>.</li>
 <li>fp_read() adds <code>header$switch_angle_from</code> and <code>header$switch_angle_to</code> for CP1/CP3 files: the pod’s switch angle limits, as raw tilt values.</li>
+<li>fp_read() now gives an error for unknown time zone names, instead of silently using UTC”</li>
 <li>fp_summarize() gains an <code>fpod_compat</code> argument (default <code>TRUE</code>). With <code>fpod_compat = TRUE</code>, every minute from the first click in <code>x</code> onwards counts as on, as in the FPOD app, which stops checking a C-POD’s tilt once it has seen a click. With <code>fpod_compat = FALSE</code>, only minutes where the pod was on (<code>env$pod_on</code>) count, which excludes minutes where the pod was tilted past its switch angle. F-POD results are the same either way.</li>
 </ul></div>
 <div class="section level3">

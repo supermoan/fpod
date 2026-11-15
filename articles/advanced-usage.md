@@ -57,55 +57,55 @@ str(dat, 2)
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
@@ -133,55 +133,55 @@ str(dat, 2)
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>  $ :List of 4
 #>   ..$ header:List of 17
 #>   ..$ env   :Classes 'data.table' and 'data.frame':  14400 obs. of  8 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ wav   :Classes 'data.table' and 'data.frame':  15995 obs. of  3 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   ..$ clicks:Classes 'data.table' and 'data.frame':  82637 obs. of  14 variables:
-#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x63dc5de11190> 
+#>   .. ..- attr(*, ".internal.selfref")=<pointer: 0x558517765180> 
 #>   .. ..- attr(*, "start")= POSIXct[1:1], format: "2024-12-05 06:00:00"
 #>   .. ..- attr(*, "on")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
 #>   .. ..- attr(*, "minutes")= int [1:14400] 0 1 2 3 4 5 6 7 8 9 ...
