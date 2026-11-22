@@ -30,6 +30,8 @@
 
 ## New features
 
+* fp_read() now also adds a column `env$time_lost`, i.e. the recording time 
+  missed because the pod maxed out (hit its click limit) in a minute.
 * fp_read() gains a `time_offset` argument (seconds or difftime), added to
   all times in a file. Use it to convert the POD clock to UTC (e.g. -2 hours
   for a clock set to Central European summer time) and to correct known clock

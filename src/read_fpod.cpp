@@ -183,6 +183,13 @@ public:
     std::vector<bool> next_min;
     // number of clicks between minute record i and minute record i+1
     std::vector<int> n_clicks;
+    // From the minute record: all clicks logged during the minute
+    // (before train detection, so including noise), and the fraction of
+    // the minute lost because the minute's click limit was reached
+    // (logging stops until the next minute). Element i describes the
+    // minute that starts at minute record i, like n_clicks.
+    std::vector<int> n_clicks_all;
+    std::vector<double> time_lost;
 
     Rcpp::List& header;
     int pic_code{0};
@@ -282,7 +289,9 @@ public:
                 Named("bat_use") = wrap(bat_use),
                 //Named("prior_min") = wrap(prior_min),
                 //Named("next_min") = wrap(next_min),
-                Named("pod_on") = wrap(pod_on)
+                Named("pod_on") = wrap(pod_on),
+                Named("n_clicks_all") = wrap(n_clicks_all),
+                Named("time_lost") = wrap(time_lost)
             );
 
             ret.push_back(env, "env");
@@ -464,6 +473,10 @@ int getFPODData(std::ifstream& fid,
                 dat.prior_min.push_back(buf[10] & 1);
                 dat.next_min.push_back((buf[10] >> 2) & 1);
                 dat.n_clicks.push_back(0);
+                // byte 1: time in the minute (1/183 min units) when logging
+                // stopped; 183 = full minute. Bytes 8-9: clicks logged.
+                dat.n_clicks_all.push_back((buf[8] << 8) | buf[9]);
+                dat.time_lost.push_back(buf[1] < 183 ? (183.0 - buf[1]) / 183.0 : 0.0);
 
             }
         }
@@ -576,6 +589,18 @@ int getCPODData(std::ifstream& fid,
                 prev_count = (ext == "CP3") ? ((buf[7] << 8) | buf[8]) : 0;
                 dat.next_min.push_back(0);
                 dat.n_clicks.push_back(0);
+                // CP3 (file version 2): byte 6 = time in the minute
+                // (1/183 min units) when the click limit was reached, 0 if it
+                // was not; bytes 7-8 = clicks logged. CP1 minute records not
+                // traced, and CP3 version 1 encodes the count differently.
+                if (ext == "CP3") {
+                    dat.n_clicks_all.push_back((buf[7] << 8) | buf[8]);
+                    dat.time_lost.push_back(buf[6] > 0
+                                                ? (183.0 - std::min<int>(buf[6], 183)) / 183.0 : 0.0);
+                } else {
+                    dat.n_clicks_all.push_back(NA_INTEGER);
+                    dat.time_lost.push_back(NA_REAL);
+                }
                 dat.bat_use.push_back(NA_INTEGER); // not recorded by C-PODs
             }
         }

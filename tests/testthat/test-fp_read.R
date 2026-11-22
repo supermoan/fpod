@@ -19,7 +19,7 @@ test_that("FP3 is read correctly", {
 
     # env data
     expect_equal(nrow(dat$env), 14400L)
-    expect_equal(ncol(dat$env), 8L)
+    expect_equal(ncol(dat$env), 10L)
 
     # clicks data
     expect_equal(nrow(dat$clicks), 82637L)
@@ -92,4 +92,13 @@ test_that("pod_on is complete and covers every minute with clicks", {
     expect_type(dat$env$pod_on, "logical")
     expect_false(anyNA(dat$env$pod_on))
     expect_true(all(dat$env[minute %in% dat$clicks$minute, pod_on]))
+})
+
+test_that("click counts and time lost are read from minute records", {
+    dat <- fp_read(fp_example("gullars_period1.FP3"))
+    expect_true(all(c("n_clicks_all", "time_lost") %in% names(dat$env)))
+    expect_equal(sum(dat$env$time_lost > 0), 21L)
+    expect_true(all(dat$env$time_lost >= 0 & dat$env$time_lost < 1))
+    expect_true(all(dat$env[time_lost > 0, n_clicks_all] > 15000))
+    expect_true(median(dat$env$n_clicks_all) < 1000)
 })
