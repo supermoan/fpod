@@ -55,7 +55,8 @@
 <li>added a time column to the “env” data.table in the list returned by fp_read()</li>
 </ul><div class="section level3">
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>fp_read() gains a <code>time_offset</code> argument (seconds or difftime), added to all times in a file. Use it to convert the POD clock to UTC (e.g. -2 hours for a clock set to Central European summer time) and to correct known clock errors. A warning is given for plain numbers under one hour, which are likely hours given without units.</li>
+<ul><li>fp_read() now also adds a column <code>env$time_lost</code>, i.e. the recording time missed because the pod maxed out (hit its click limit) in a minute.</li>
+<li>fp_read() gains a <code>time_offset</code> argument (seconds or difftime), added to all times in a file. Use it to convert the POD clock to UTC (e.g. -2 hours for a clock set to Central European summer time) and to correct known clock errors. A warning is given for plain numbers under one hour, which are likely hours given without units.</li>
 <li>fp_read() adds a <code>time</code> column to <code>env</code>.</li>
 <li>fp_read() adds <code>header$switch_angle_from</code> and <code>header$switch_angle_to</code> for CP1/CP3 files: the pod’s switch angle limits, as raw tilt values.</li>
 <li>fp_read() now gives an error for unknown time zone names, instead of silently using UTC”</li>
